@@ -45,6 +45,7 @@ void Mesh::Render()
 		(void*)0);					// array buffer offset
 	
 	// Draw the triangle !
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glDrawArrays(GL_TRIANGLES, 0, 3); //Starting from vertex 0; 3 vertices = triangle
-	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(m_shader->GetAttrVertices());
 }
