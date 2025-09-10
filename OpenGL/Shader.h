@@ -26,8 +26,8 @@ private:
 	void EvaluateShader(int _infoLength, GLuint _id);
 
 	// Members
-	GLuint m_programID;
-	GLuint m_attrVertices;
+	GLuint m_programID;				// ID of our shader program
+	GLuint m_attrVertices;			// Handle for the attribute vertex buffer
 	GLint m_result = GL_FALSE;
 	int m_infoLogLength;
 };
