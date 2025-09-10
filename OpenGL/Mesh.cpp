@@ -17,7 +17,7 @@ void Mesh::Create(Shader* _shader)
 	m_shader = _shader;
 
 	m_vertexData = { -1.0f, -1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
+					  1.0f, -1.0f, 0.0f,
 					  0.0f,  1.0f, 0.0f };
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
