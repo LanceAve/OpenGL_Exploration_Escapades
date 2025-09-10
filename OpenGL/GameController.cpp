@@ -3,6 +3,7 @@
 
 GameController::GameController()
 {
+	m_shader = { };
 	m_mesh = { };
 }
 
@@ -16,19 +17,25 @@ void GameController::Initialize()
 
 void GameController::RunGame()
 {
+	// Create and compile our GLSL program from the shaders
+	m_shader = Shader();
+	m_shader.LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentShader");
+	
 	m_mesh = Mesh();
-	m_mesh.Create();
+	m_mesh.Create(&m_shader);
 
-	GLFWwindow* win = WindowController::GetInstance().GetWindow();
 	do
 	{
 		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
 		m_mesh.Render();
-		glfwSwapBuffers(win);			// Swap the front and back buffers
+		glfwSwapBuffers(WindowController::GetInstance().GetWindow());	// Swap the back and front buffers
 		glfwPollEvents();
 
-	} while (glfwGetKey(win, GLFW_KEY_ESCAPE) != GLFW_PRESS &&		// Check if the ESC key was pressed
-		glfwWindowShouldClose(win) == 0);							// Check if the window was closed
+	} 
+	while (glfwGetKey(WindowController::GetInstance().GetWindow(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&		// Check if the ESC key was pressed
+			glfwWindowShouldClose(WindowController::GetInstance().GetWindow()) == 0);						// Check if the window was closed
 
+	// memory cleaning process
 	m_mesh.Cleanup();
+	m_shader.Cleanup();
 }
