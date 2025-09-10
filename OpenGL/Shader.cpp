@@ -36,14 +36,14 @@ GLuint Shader::LoadShaderFile(const char* _filePath, GLenum _type)
 	// Read the Shader code from the file
 	std::string shaderCode;
 	std:ifstream shaderStream(_filePath, std::ios::in);
-	M_ASSERT(shaderStream.is_open(), ("Not possible to open %s. Are you sure you are in the correct directory? Please refer to the FAQ if you are having trouble. \n", _filePath));
+	M_ASSERT(shaderStream.is_open(), ("Not possible to open %s. Are you sure you are in the correct directory? Please refer to the FAQ if you are having trouble !\n", _filePath));
 	std::string Line = "";
 	while (getline(shaderStream, Line))
 		shaderCode += "\n" + Line;
 	shaderStream.close();
 
 	// Compile the Shader
-	char const* sourcePointer = shaderCode.c_str();	// locate the shader pointer
+	char const* sourcePointer = shaderCode.c_str();			// locate the shader pointer
 	glShaderSource(shaderID, 1, &sourcePointer, NULL);
 	glCompileShader(shaderID);
 
