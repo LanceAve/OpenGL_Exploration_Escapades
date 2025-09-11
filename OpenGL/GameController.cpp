@@ -33,6 +33,20 @@ void GameController::RunGame()
 	{
 		System::Windows::Forms::Application::DoEvents();	// Handle C++/CLI form events
 
+		// Red Channel rendering portion
+		GLint loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderRedChannel");
+		glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderRedChannel);
+
+		// Green Channel rendering portion
+		loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderGreenChannel");
+		glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderGreenChannel);
+
+		// Blue Channel rendering portion
+		loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderBlueChannel");
+		glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderBlueChannel);
+
+
+
 		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
 		m_mesh.Render();
 		glfwSwapBuffers(WindowController::GetInstance().GetWindow());	// Swap the back and front buffers

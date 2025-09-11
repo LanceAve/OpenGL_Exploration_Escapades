@@ -15,12 +15,16 @@ namespace PrimitiveDrawTest {
 	public ref class ToolWindow : public System::Windows::Forms::Form
 	{
 	public:
+		static bool RenderRedChannel;
+		static bool RenderGreenChannel;
+		static bool RenderBlueChannel;
+
 		ToolWindow(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			RenderRedChannel = checkBoxRedChannel->Checked;
+			RenderGreenChannel = checkBoxGreenChannel->Checked;
+			RenderBlueChannel = checkBoxBlueChannel->Checked;
 		}
 
 	protected:
@@ -34,6 +38,10 @@ namespace PrimitiveDrawTest {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::CheckBox^ checkBoxRedChannel;
+	protected:
+	private: System::Windows::Forms::CheckBox^ checkBoxGreenChannel;
+	private: System::Windows::Forms::CheckBox^ checkBoxBlueChannel;
 
 	private:
 		/// <summary>
@@ -48,20 +56,72 @@ namespace PrimitiveDrawTest {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->checkBoxRedChannel = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBoxGreenChannel = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBoxBlueChannel = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
+			// 
+			// checkBoxRedChannel
+			// 
+			this->checkBoxRedChannel->AutoSize = true;
+			this->checkBoxRedChannel->Location = System::Drawing::Point(13, 13);
+			this->checkBoxRedChannel->Name = L"Red Channel";
+			this->checkBoxRedChannel->Size = System::Drawing::Size(80, 17);
+			this->checkBoxRedChannel->TabIndex = 0;
+			this->checkBoxRedChannel->Text = L"Red Channel";
+			this->checkBoxRedChannel->UseVisualStyleBackColor = true;
+			this->checkBoxRedChannel->CheckedChanged += gcnew System::EventHandler(this, &ToolWindow::checkBoxRedChannel_CheckedChanged);
+			// 
+			// checkBoxGreenChannel
+			// 
+			this->checkBoxGreenChannel->AutoSize = true;
+			this->checkBoxGreenChannel->Location = System::Drawing::Point(13, 37);
+			this->checkBoxGreenChannel->Name = L"Green Channel";
+			this->checkBoxGreenChannel->Size = System::Drawing::Size(80, 17);
+			this->checkBoxGreenChannel->TabIndex = 1;
+			this->checkBoxGreenChannel->Text = L"Green Channel";
+			this->checkBoxGreenChannel->UseVisualStyleBackColor = true;
+			this->checkBoxGreenChannel->CheckedChanged += gcnew System::EventHandler(this, &ToolWindow::checkBoxGreenChannel_CheckedChanged);
+			// 
+			// checkBoxBlueChannel
+			// 
+			this->checkBoxBlueChannel->AutoSize = true;
+			this->checkBoxBlueChannel->Location = System::Drawing::Point(13, 61);
+			this->checkBoxBlueChannel->Name = L"Blue Channel";
+			this->checkBoxBlueChannel->Size = System::Drawing::Size(80, 17);
+			this->checkBoxBlueChannel->TabIndex = 2;
+			this->checkBoxBlueChannel->Text = L"Blue Channel";
+			this->checkBoxBlueChannel->UseVisualStyleBackColor = true;
+			this->checkBoxBlueChannel->CheckedChanged += gcnew System::EventHandler(this, &ToolWindow::checkBoxBlueChannel_CheckedChanged);
 			// 
 			// ToolWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(284, 261);
+			this->Controls->Add(this->checkBoxBlueChannel);
+			this->Controls->Add(this->checkBoxGreenChannel);
+			this->Controls->Add(this->checkBoxRedChannel);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"ToolWindow";
 			this->Text = L"ToolWindow";
 			this->TopMost = true;
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void checkBoxRedChannel_CheckedChanged(System::Object^ sender, System::EventArgs^ e) 
+	{
+		RenderRedChannel = checkBoxRedChannel->Checked;
+	}
+	private: System::Void checkBoxGreenChannel_CheckedChanged(System::Object^ sender, System::EventArgs^ e) 
+	{
+		RenderGreenChannel = checkBoxGreenChannel->Checked;
+	}
+	private: System::Void checkBoxBlueChannel_CheckedChanged(System::Object^ sender, System::EventArgs^ e) 
+	{
+		RenderBlueChannel = checkBoxBlueChannel->Checked;
+	}	
+};
 }
