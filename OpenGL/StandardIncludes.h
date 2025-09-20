@@ -17,8 +17,12 @@
 #include <GL/glew.h>		// Include GLEW
 #include <GLFW/glfw3.h>		// Include GLFW
 #include <glm/glm.hpp>		// Include GLM
+#include <glm/ext.hpp>		// OpenGL Experimental to_string (might be useful)
+#include <glm/gtc/matrix_transform.hpp> // View / Projection
 
-#include "Singleton.h" 
+// User-made headers
+#include "Resolution.h"
+#include "Singleton.h"
 
 // avoids redundant std:: after every method call
 using namespace std;	
