@@ -17,7 +17,6 @@ public:
 	// Methods
 	void LoadShaders(const char* _vertexFilePath, const char* _fragementFilePath);
 	void Cleanup();
-	GLuint GetAttrWVP() { return m_attrWVP; }	// allow access to WVP
 
 private:
 	// Methods
@@ -29,9 +28,8 @@ private:
 	// Members
 	GLuint m_programID;				// ID of our shader program
 	GLuint m_attrVertices;			// Handle for the attribute vertex buffer
-	GLuint m_attrWVP;
 	GLint m_result = GL_FALSE;
-	int	m_infoLogLength;
+	int m_infoLogLength;
 };
 
 #endif //SHADER_H

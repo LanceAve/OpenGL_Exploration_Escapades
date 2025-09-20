@@ -5,7 +5,6 @@ Mesh::Mesh()
 {
 	m_shader = nullptr;
 	m_vertexBuffer = 0;
-	m_world = glm::mat4(1.0f);
 }
 
 Mesh::~Mesh()
@@ -32,25 +31,21 @@ void Mesh::Cleanup()
 }
 
 // this time define what the Render function does
-// and define the world view stuff
-void Mesh::Render(glm::mat4 _wvp)
+void Mesh::Render()
 {
 	glUseProgram(m_shader->GetProgramID());	// use our shader instead of the built-in one
 	
 	// 1st attribute buffer : vertices
 	glEnableVertexAttribArray(m_shader->GetAttrVertices());
-	glVertexAttribPointer(
-		m_shader->GetAttrVertices(),	// The attribute we want to configure
-		3,								// size
-		GL_FLOAT,						// type
-		GL_FALSE,						// normalized?
-		0,								// stride
-		(void*)0);						// array buffer offset
+	glVertexAttribPointer(m_shader->GetAttrVertices(),		// The attribute we want to configure
+		3,							// size
+		GL_FLOAT,					// type
+		GL_FALSE,					// normalized?
+		0,							// stride
+		(void*)0);					// array buffer offset
 	
-	_wvp *= m_world;
-	
+	// Draw the triangle !
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &_wvp[0][0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3); // Draw the triangle !
+	glDrawArrays(GL_TRIANGLES, 0, 3); //Starting from vertex 0; 3 vertices = triangle
 	glDisableVertexAttribArray(m_shader->GetAttrVertices());
 }

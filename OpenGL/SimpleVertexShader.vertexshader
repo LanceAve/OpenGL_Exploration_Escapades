@@ -1,12 +1,8 @@
 #version 120 // OpenGL version 2.1 (minimum requirement)
 
-// now updated to have the shader accept projection matrices
 attribute vec3 vertices; // value sent from application to this attribute
-uniform mat4 WVP;
 
 void main()
 {
-	gl_Position = WVP * vec4(vertices, 1.0); 
-	// Initial code was used to Pass-through shader, pass positions to next shader
-	// Now it transforms the model to scren projection
+	gl_Position = vec4(vertices, 1.0); // Pass-through shader, pass positions to next shader
 }

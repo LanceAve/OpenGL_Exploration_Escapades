@@ -1,12 +1,10 @@
 #include "WindowController.h"
 
-// Initial method that defines WindowController
 WindowController::WindowController()
 {
 	m_window = nullptr;
 }
 
-// Termination method that triggers if window does not exist
 WindowController::~WindowController()
 {
 	if (m_window != nullptr)
@@ -16,7 +14,6 @@ WindowController::~WindowController()
 	}
 }
 
-// Method responsible for rendering a new window
 void WindowController::NewWindow()
 {
 	M_ASSERT(glfwInit(), "Failed to initialize GLFW.");	// Initialize GLFW
@@ -27,15 +24,4 @@ void WindowController::NewWindow()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	M_ASSERT((m_window = glfwCreateWindow(1024, 768, "A sample scene", NULL, NULL)) != nullptr, "Failed to open GLFW window.");
 	glfwMakeContextCurrent(m_window);
-}
-
-// Method responsible for getting the resolution of the current active monitor
-/*
-* Note: If you are running a multi - monitor display, things may be a bit difficult
-* Keep that in mind for the future.
-*/ 
-Resolution WindowController::GetResolution()
-{
-	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-	return Resolution(mode->width, mode->height);
 }

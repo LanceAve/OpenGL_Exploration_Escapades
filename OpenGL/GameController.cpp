@@ -5,7 +5,6 @@
 GameController::GameController()
 {
 	m_shader = { };
-	m_camera = { };
 	m_mesh = { };
 }
 
@@ -15,9 +14,6 @@ void GameController::Initialize()
 	M_ASSERT(glewInit() == GLEW_OK, "Failed to initialize GLEW.")		// Initialize GLEW
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);				// Ensure we can capture the escape key.
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);								// Dark blue background (can be deduced using art program)
-
-	// Create the default perspective perspective camera
-	m_camera = Camera(WindowController::GetInstance().GetResolution());
 }
 
 void GameController::RunGame()
@@ -52,7 +48,7 @@ void GameController::RunGame()
 
 
 		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
-		m_mesh.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
+		m_mesh.Render();
 		glfwSwapBuffers(WindowController::GetInstance().GetWindow());	// Swap the back and front buffers
 		glfwPollEvents();
 
