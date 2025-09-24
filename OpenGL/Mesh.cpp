@@ -1,11 +1,15 @@
 #include "Mesh.h"
 #include "Shader.h"
 
+// avoids redundant glm:: & std after every method call
+using namespace glm;
+
 Mesh::Mesh()
 {
 	m_shader = nullptr;
 	m_vertexBuffer = 0;
-	m_world = glm::mat4(1.0f);
+	m_indexBuffer = 0;
+	m_world = mat4(1.0f);
 }
 
 Mesh::~Mesh()
