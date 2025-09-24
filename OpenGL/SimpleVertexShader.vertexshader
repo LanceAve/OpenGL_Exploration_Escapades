@@ -1,7 +1,8 @@
 #version 330 // OpenGL version 3.30 (minimum requirement)
 
 // now updated to have the shader accept projection matrices
-attribute vec3 vertices; // value sent from application to this attribute
+in vec3 vertices; // value sent from application to this attribute
+in vec4 colors;
 uniform mat4 WVP;
 
 void main()
