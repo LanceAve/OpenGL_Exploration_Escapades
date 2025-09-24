@@ -21,8 +21,9 @@ public:
 private:
 	Shader* m_shader;						// then define the variable
 	GLuint m_vertexBuffer;					// stored in GPU buffer
-	vector<GLubyte> m_indexBuffer;			// notice that it uses the GLubyte type (also index buffer gets stored in RAM as well)
+	GLuint m_indexBuffer;					// store in GPU buffer
 	vector<GLfloat> m_vertexData;			// store the vertex data in RAM
+	vector<GLubyte> m_indexData;			// notice that it uses the GLubyte type (also index buffer gets stored in RAM as well)
 	mat4 m_world;
 };
 
