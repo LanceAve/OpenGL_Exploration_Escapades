@@ -48,16 +48,28 @@ void Mesh::Render(glm::mat4 _wvp)
 	glEnableVertexAttribArray(m_shader->GetAttrVertices());
 	glVertexAttribPointer(
 		m_shader->GetAttrVertices(),	// The attribute we want to configure
-		3,								// size
+		3,								// size (now to render the vertices. 3 vertex per primitive
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
-		0,								// stride
-		(void*)0);						// array buffer offset
+		7 * sizeof(float),				// stride (7 floats now per vertex definition)
+		(void*)0);	// array buffer offset
+
+	// 2nd attribute buffer : color
+	glEnableVertexAttribArray(m_shader->GetAttrVertices());
+	glVertexAttribPointer(
+		m_shader->GetAttrVertices(),	// The attribute we want to configure
+		4,								// size (now includes color value)
+		GL_FLOAT,						// type
+		GL_FALSE,						// normalized?
+		7 * sizeof(float),				// stride (now modified)
+		(void*)(3 * sizeof(float)));	// array buffer offset
 	
+	// 3rd attribute : WVP (World-View-Projection)
 	_wvp *= m_world;
+	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &_wvp[0][0]);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &_wvp[0][0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3); // Draw the triangle !
+	glDrawArrays(GL_TRIANGLES, 0, m_vertexData.size() / 7);			// Draw the triangle, but include the vertexData as well now
+	glDisableVertexAttribArray(m_shader->GetAttrColors());
 	glDisableVertexAttribArray(m_shader->GetAttrVertices());
 }
