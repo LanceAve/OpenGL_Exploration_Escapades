@@ -13,14 +13,17 @@ public:
 	virtual ~Camera();
 
 	// Accessors
-	glm::mat4 GetProjection() { return m_projection; }
-	glm::mat4 GetView() { return m_view; }
+	mat4 GetProjection() { return m_projection; }
+	mat4 GetView() { return m_view; }
 
 private:
 	// Members
-	glm::mat4 m_projection;
-	glm::mat4 m_view;
+	mat4 m_projection;
+	mat4 m_view;
 
 };
+
+// avoids redundant std:: after every method call
+using namespace glm;
 
 #endif CAMERA_H	// CAMERA_H
