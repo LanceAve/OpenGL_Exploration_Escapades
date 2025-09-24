@@ -1,7 +1,8 @@
-#version 120 // OpenGL version 2.1 (minimum requirement)
+#version 330 // OpenGL version 3.30 (requirement modified for newer features)
 
 // now updated to have the shader accept projection matrices
 attribute vec3 vertices; // value sent from application to this attribute
+attribute vec4 colors;  // gonna be adding colors now sick
 uniform mat4 WVP;
 
 void main()
@@ -9,4 +10,7 @@ void main()
 	gl_Position = WVP * vec4(vertices, 1.0); 
 	// Initial code was used to Pass-through shader, pass positions to next shader
 	// Now it transforms the model to scren projection
+
+	// adding color features to pass it through
+	retColor = colors;
 }
