@@ -52,12 +52,12 @@ void Mesh::Render(glm::mat4 _wvp)
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
 		7 * sizeof(float),				// stride (7 floats now per vertex definition)
-		(void*)0);	// array buffer offset
+		(void*)0);						// array buffer offset
 
 	// 2nd attribute buffer : color
-	glEnableVertexAttribArray(m_shader->GetAttrVertices());
+	glEnableVertexAttribArray(m_shader->GetAttrColors());
 	glVertexAttribPointer(
-		m_shader->GetAttrVertices(),	// The attribute we want to configure
+		m_shader->GetAttrColors(),		// The attribute we want to configure
 		4,								// size (now includes color value)
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
