@@ -1,4 +1,6 @@
 #include "Camera.h"
+// avoids redundant std:: after every method call
+using namespace glm;
 
 Camera::Camera()
 {
@@ -16,22 +18,22 @@ Camera::Camera(Resolution _screenResolution)
 	// FYI: For regular projection.
 	// Ortho below if you wanna muse that
 	m_projection =
-		glm::perspective(
-			glm::radians(45.0f),
+		perspective(
+			radians(45.0f),
 			(float)_screenResolution.m_width /
 			(float)_screenResolution.m_height,
 			0.1f,
-			100.0f);
+			1000.0f);
 
 	// orthographic camera (for reference) :
 	// glm::mat4 Projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 100.0f);
 	// \> this is in world coordinates though, that's why the numbers are so large
 
 	// Camera matrix
-	m_view = glm::lookAt(
-		glm::vec3(2, 1.5, 1.5),	// Camera is set to (4, 3, 3) in World Space (can be altered to change camera location
-		glm::vec3(0, 0, 0),		// and looks at the origin point
-		glm::vec3(0, 1, 0)		// Then head is set to UP (you can set it to (0, -1, 0) to look upside down)
+	m_view = lookAt(
+		vec3(200, 200, 200),	// Camera is set to (4, 3, 3) in World Space (can be altered to change camera location
+		vec3(0, 0, 0),			// and looks at the origin point
+		vec3(0, 1, 0)			// Then head is set to UP (you can set it to (0, -1, 0) to look upside down)
 	);
 }
 
