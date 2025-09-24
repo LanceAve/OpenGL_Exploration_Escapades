@@ -21,16 +21,25 @@ void Mesh::Create(Shader* _shader)
 {
 	m_shader = _shader;
 
+	// Good source for float colors (wowzers!)
+	// https://prideout.net/blog/old/archive/colors.php.html#Floats
+	float a = 26.0f;
+	float b = 42.0f;
 	m_vertexData = { 
-		/*  Position  */  /*    RGBA Color    */
-		0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-		0.3f, 0.1f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-		0.4f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 
-		0.7f, 0.8f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 
-		0.8f, 0.4f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 
-		1.0f, 0.6f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 
-		1.0f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 
-		1.5f, 0.6f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, };
+		/*   Position    */ /*       RGBA Color        */
+	   -a,     0.0f,  b,	1.0f,	0.0f,	0.0f,	1.0f,	// Red
+		a,     0.0f,  b,	1.0f,	0.549f, 0.0f,	1.0f,	// Orange
+	   -a,     0.0f, -b,	1.0f,	1.0f,	0.0f,	1.0f,	// Yellow
+		a,     0.0f, -b,	0.0f,	0.502f,	0.0f,	1.0f,	// Green
+		0.0f,  b,	  a,	0.0f,	0.0f,	1.0f,	1.0f,	// Blue
+		0.0f,  b,    -a,	0.294f, 0.0f,	0.51f,	1.0f,	// Indigo
+		0.0f, -b,     a,	0.502f, 0.0f,	0.502f, 1.0f,	// Purple
+		0.0f, -b,    -a,	1.0f,	1.0f,	1.0f,	1.0f,	// White
+		b,     a,	  0.0f, 0.0f,	1.0f,	1.0f,	1.0f,	// Cyan
+	   -b,     a,	  0.0f, 0.0f,	0.0f,	0.0f,	1.0f,	// Black
+		b,    -a,     0.0f,	0.118f,	0.565f,	1.0f,	1.0f,	// Dodger Blue
+	   -b,    -a,	  0.0f, 0.863f, 0.078f, 0.235f, 1.0f,	// Crimson
+	};	
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, m_vertexData.size() * sizeof(float), m_vertexData.data(), GL_STATIC_DRAW);
