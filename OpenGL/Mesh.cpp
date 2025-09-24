@@ -20,7 +20,7 @@ void Mesh::Create(Shader* _shader)
 	m_vertexData = { 
 		/*  Position  */  /*    RGBA Color    */
 		0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-		0.3f, 0.11f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+		0.3f, 0.1f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 		0.4f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 
 		0.7f, 0.8f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 
 		0.8f, 0.4f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 
@@ -69,7 +69,7 @@ void Mesh::Render(glm::mat4 _wvp)
 	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &_wvp[0][0]);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glDrawArrays(GL_LINES, 0, m_vertexData.size() / 7);			// Draw the triangle, but include the vertexData as well now
+	glDrawArrays(GL_LINE_STRIP, 0, m_vertexData.size() / 7);		// Draw the triangle, but include the vertexData as well now
 	//				  \-> primitive can be changed to draw different objects (e.g. GL_LINES) 
 	glDisableVertexAttribArray(m_shader->GetAttrColors());
 	glDisableVertexAttribArray(m_shader->GetAttrVertices());
