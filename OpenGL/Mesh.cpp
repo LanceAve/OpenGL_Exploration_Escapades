@@ -43,6 +43,18 @@ void Mesh::Create(Shader* _shader)
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, m_vertexData.size() * sizeof(float), m_vertexData.data(), GL_STATIC_DRAW);
+
+	// adding the index data as well
+	m_indexData = {
+		0, 6,  1, 0, 11, 6, 1, 4,  0, 1, 8,  4,
+		1, 10, 8, 2, 5,  3, 2, 9,  5, 2, 11, 9,
+		3, 7,  2, 3, 10, 7, 4, 8,  5, 4, 9,  0,
+		5, 8,  3, 5, 9,  4, 6, 10, 1, 6, 11, 7,
+		7, 10, 6, 7, 11, 2, 8, 10, 3, 9, 11, 0
+	};
+	glGenBuffers(1, &m_indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexData.size() * sizeof(GLubyte), m_indexData.data(), GL_STATIC_DRAW);
 }
 
 // define what the cleanup function does (used to delete the mesh)
