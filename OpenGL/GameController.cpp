@@ -22,9 +22,9 @@ void GameController::Initialize()
 
 void GameController::RunGame()
 {
-	// Show the C++/CLI tool window
-	PrimitiveDrawTest::ToolWindow^ window = gcnew PrimitiveDrawTest::ToolWindow();
-	window->Show();
+	//// Show the C++/CLI tool window
+	//PrimitiveDrawTest::ToolWindow^ window = gcnew PrimitiveDrawTest::ToolWindow();
+	//window->Show();
 
 	// Create and compile our GLSL program from the shaders
 	m_shader = Shader();
@@ -37,17 +37,17 @@ void GameController::RunGame()
 	{
 		System::Windows::Forms::Application::DoEvents();	// Handle C++/CLI form events
 
-		// Red Channel rendering portion
-		GLint loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderRedChannel");
-		glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderRedChannel);
+		//// Red Channel rendering portion
+		//GLint loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderRedChannel");
+		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderRedChannel);
 
-		// Green Channel rendering portion
-		loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderGreenChannel");
-		glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderGreenChannel);
+		//// Green Channel rendering portion
+		//loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderGreenChannel");
+		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderGreenChannel);
 
-		// Blue Channel rendering portion
-		loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderBlueChannel");
-		glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderBlueChannel);
+		//// Blue Channel rendering portion
+		//loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderBlueChannel");
+		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderBlueChannel);
 
 		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
 		m_mesh.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
