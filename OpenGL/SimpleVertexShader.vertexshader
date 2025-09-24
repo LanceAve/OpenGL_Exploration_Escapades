@@ -1,4 +1,4 @@
-#version 120 // OpenGL version 2.1 (minimum requirement)
+#version 330 // OpenGL version 3.30 (minimum requirement)
 
 // now updated to have the shader accept projection matrices
 attribute vec3 vertices; // value sent from application to this attribute
