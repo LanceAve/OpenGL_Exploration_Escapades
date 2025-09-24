@@ -11,10 +11,12 @@ GameController::GameController()
 
 void GameController::Initialize()
 {
-	GLFWwindow* window = WindowController::GetInstance().GetWindow();	// Call this first, as it creates a window required by GLEW
+	GLFWwindow* window = WindowController::GetInstance().GetWindow();	// Must call this first, since it creates the window
 	M_ASSERT(glewInit() == GLEW_OK, "Failed to initialize GLEW.")		// Initialize GLEW
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);				// Ensure we can capture the escape key.
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);				// Make sure that we can capture the escape key if it's pressed
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);								// Changed to Black backgroun now (can be deduced using art program)
+	glEnable(GL_CULL_FACE);												// prevents face of mesh from being displayed on both sides
+
 
 	// Create the default perspective camera
 	m_camera = Camera(WindowController::GetInstance().GetResolution());
@@ -37,6 +39,7 @@ void GameController::RunGame()
 	{
 		System::Windows::Forms::Application::DoEvents();	// Handle C++/CLI form events
 
+		// commented out since ToolWindow is not being used in this part of the lab
 		//// Red Channel rendering portion
 		//GLint loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderRedChannel");
 		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderRedChannel);
