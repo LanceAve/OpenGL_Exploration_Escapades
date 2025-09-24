@@ -2,6 +2,8 @@
 #define CAMERA_H
 
 #include "..\OpenGL\StandardIncludes.h"
+// avoids redundant std:: after every method call
+using namespace glm;
 
 // define Camera class responsible for... well, camera functions
 class Camera
@@ -22,8 +24,5 @@ private:
 	mat4 m_view;
 
 };
-
-// avoids redundant std:: after every method call
-using namespace glm;
 
 #endif CAMERA_H	// CAMERA_H
