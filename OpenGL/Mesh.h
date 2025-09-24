@@ -2,6 +2,9 @@
 #define MESH_H
 
 #include "StandardIncludes.h"
+// avoids redundant std:: and glm:: after every method call
+using namespace std;
+using namespace glm;
 
 class Shader;
 
@@ -26,9 +29,5 @@ private:
 	vector<GLubyte> m_indexData;			// notice that it uses the GLubyte type (also index buffer gets stored in RAM as well)
 	mat4 m_world;
 };
-
-// avoids redundant std:: after every method call
-using namespace std;
-using namespace glm;
 
 #endif // MESH_H
