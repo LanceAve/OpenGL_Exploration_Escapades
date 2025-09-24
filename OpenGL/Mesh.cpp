@@ -61,6 +61,7 @@ void Mesh::Create(Shader* _shader)
 void Mesh::Cleanup()
 {
 	glDeleteBuffers(1, &m_vertexBuffer);
+	glDeleteBuffers(1, &m_indexBuffer);
 }
 
 // this time define what the Render function does
@@ -73,13 +74,13 @@ void Mesh::Render(glm::mat4 _wvp)
 	glEnableVertexAttribArray(m_shader->GetAttrVertices());
 	glVertexAttribPointer(
 		m_shader->GetAttrVertices(),	// The attribute we want to configure
-		3,								// size (now to render the vertices. 3 vertex per primitive
+		3,								// size (now to render the vertices. 3 vertex per primitive)
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
 		7 * sizeof(float),				// stride (7 floats now per vertex definition)
 		(void*)0);						// array buffer offset
 
-	// 2nd attribute buffer : color
+	// 2nd attribute buffer : colors
 	glEnableVertexAttribArray(m_shader->GetAttrColors());
 	glVertexAttribPointer(
 		m_shader->GetAttrColors(),		// The attribute we want to configure
@@ -90,11 +91,18 @@ void Mesh::Render(glm::mat4 _wvp)
 		(void*)(3 * sizeof(float)));	// array buffer offset
 	
 	// 3rd attribute : WVP (World-View-Projection)
+	m_world = rotate(m_world, 0.001f, { 0, 1, 0 });		// rotate the world by 1 on the y axis
 	_wvp *= m_world;
 	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &_wvp[0][0]);
 	
+	// Bind both the vertex and index to reduce memory use
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, m_vertexData.size() / 7);		// Draw the triangle, but include the vertexData as well now
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer); 
+
+	// draw elements rather than arrays
+	glDrawElements(GL_TRIANGLES, m_indexData.size(), GL_UNSIGNED_BYTE, (void*)0);
+	
+	//glDrawArrays(GL_TRIANGLES, 0, m_vertexData.size() / 7);		// Draw the triangle, but include the vertexData as well now
 	//				  \-> primitive can be changed to draw different objects (e.g. GL_LINES) 
 	glDisableVertexAttribArray(m_shader->GetAttrColors());
 	glDisableVertexAttribArray(m_shader->GetAttrVertices());
