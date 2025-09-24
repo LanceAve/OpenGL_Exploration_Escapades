@@ -5,9 +5,13 @@ in vec3 vertices; // value sent from application to this attribute
 in vec4 colors;
 uniform mat4 WVP;
 
+out vec4 retColor;
+
 void main()
 {
 	gl_Position = WVP * vec4(vertices, 1.0); 
 	// Initial code was used to Pass-through shader, pass positions to next shader
 	// Now it transforms the model to scren projection
+	
+	retColor = colors; // now adding colors stuffsies
 }
