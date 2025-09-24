@@ -5,6 +5,7 @@ Shader::Shader()
 {
 	m_programID = 0;
 	m_attrVertices = 0;
+	m_attrColors = 0;
 	m_attrWVP = 0;
 	m_result = GL_FALSE;
 	m_infoLogLength = 0;
@@ -18,6 +19,7 @@ void Shader::Cleanup()
 void Shader::LoadAttributes()
 {
 	m_attrVertices = glGetAttribLocation(m_programID, "vertices");	// Get a handle for the vertex buffer
+	m_attrColors = glGetAttribLocation(m_programID, "colors");		// gonna get a handle for colors buffer now too
 	m_attrWVP = glGetUniformLocation(m_programID, "WVP");			// Get a handle for the WVP matrix
 }
 
