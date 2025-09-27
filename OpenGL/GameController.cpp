@@ -12,7 +12,7 @@ GameController::GameController()
 void GameController::Initialize()
 {
 	GLFWwindow* window = WindowController::GetInstance().GetWindow();	// Must call this first, since it creates the window
-	M_ASSERT(glewInit() == GLEW_OK, "Failed to initialize GLEW.")		// Initialize GLEW
+	M_ASSERT(glewInit() == GLEW_OK, "Failed to initialize GLEW.");		// Initialize GLEW
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);				// Make sure that we can capture the escape key if it's pressed
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);								// Changed to Black backgroun now (can be deduced using art program)
 	glEnable(GL_CULL_FACE);												// prevents face of mesh from being displayed on both sides
