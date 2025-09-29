@@ -36,7 +36,8 @@ void Mesh::Create(Shader* _shader)
 	   50.0f, -50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,	// bottom-right	
 	  -50.0f, -50.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,	// bottom-left
 	  -50.0f,  50.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f	// top-left
-	};	
+	};
+
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, m_vertexData.size() * sizeof(float), m_vertexData.data(), GL_STATIC_DRAW);
@@ -72,19 +73,19 @@ void Mesh::Render(mat4 _wvp)
 		3,								// size (now to render the vertices. 3 vertex per primitive)
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
-		7 * sizeof(float),				// stride (7 floats now per vertex definition)
+		8 * sizeof(float),				// stride (8 floats now per vertex definition)
 		(void*)0);						// array buffer offset
 
 	// 2nd attribute buffer : colors
 	glEnableVertexAttribArray(m_shader->GetAttrColors());
 	glVertexAttribPointer(
 		m_shader->GetAttrColors(),		// The attribute we want to configure
-		4,								// size (now includes color value)
+		3,								// size (modified to 3 now)
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
-		7 * sizeof(float),				// stride (now modified)
+		8 * sizeof(float),				// stride (now modified to 8 floats per vertex def)
 		(void*)(3 * sizeof(float)));	// array buffer offset
-	
+
 	// 3rd attribute buffer : texCoords
 	glEnableVertexAttribArray(m_shader->GetAttrTexCoords());
 	glVertexAttribPointer(
@@ -104,11 +105,14 @@ void Mesh::Render(mat4 _wvp)
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer); 
 
-	// draw elements rather than arrays
+	// Bind the texture now too
+	glBindTexture(GL_TEXTURE_2D, m_texture.GetTexture());
+
+	// draw a triangle element
 	glDrawElements(GL_TRIANGLES, m_indexData.size(), GL_UNSIGNED_BYTE, (void*)0);
 	
-	//glDrawArrays(GL_TRIANGLES, 0, m_vertexData.size() / 7);		// Draw the triangle, but include the vertexData as well now
-	//				  \-> primitive can be changed to draw different objects (e.g. GL_LINES) 
+	// turn off color, vertex and texture coordinate data after draw call
 	glDisableVertexAttribArray(m_shader->GetAttrColors());
 	glDisableVertexAttribArray(m_shader->GetAttrVertices());
+	glDisableVertexAttribArray(m_shader->GetAttrTexCoords());
 }
