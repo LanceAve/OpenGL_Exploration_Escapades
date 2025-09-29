@@ -28,22 +28,14 @@ void Mesh::Create(Shader* _shader)
 	
 	// Good source for float colors (wowzers!)
 	// https://prideout.net/blog/old/archive/colors.php.html#Floats
-	float a = 26.0f;
-	float b = 42.0f;
+
+	// changing shape to a square for now, but would like to attempt to do it on an icosahedron
 	m_vertexData = { 
-		/*   Position    */ /*       RGBA Color        */
-	   -a,     0.0f,  b,	1.0f,	0.0f,	0.0f,	1.0f,	// Red
-		a,     0.0f,  b,	1.0f,	0.549f, 0.0f,	1.0f,	// Orange
-	   -a,     0.0f, -b,	1.0f,	1.0f,	0.0f,	1.0f,	// Yellow
-		a,     0.0f, -b,	0.0f,	0.502f,	0.0f,	1.0f,	// Green
-		0.0f,  b,	  a,	0.0f,	0.0f,	1.0f,	1.0f,	// Blue
-		0.0f,  b,    -a,	0.294f, 0.0f,	0.51f,	1.0f,	// Indigo
-		0.0f, -b,     a,	0.502f, 0.0f,	0.502f, 1.0f,	// Purple
-		0.0f, -b,    -a,	1.0f,	1.0f,	1.0f,	1.0f,	// White
-		b,     a,	  0.0f, 0.0f,	1.0f,	1.0f,	1.0f,	// Cyan
-	   -b,     a,	  0.0f, 0.0f,	0.0f,	0.0f,	1.0f,	// Black
-		b,    -a,     0.0f,	0.118f,	0.565f,	1.0f,	1.0f,	// Dodger Blue
-	   -b,    -a,	  0.0f, 0.863f, 0.078f, 0.235f, 1.0f,	// Crimson
+	   /*   Position     */ /* RGBA Color  */ /* Texture Coords */
+	   50.0f,  50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,	// top-right
+	   50.0f, -50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,	// bottom-right	
+	  -50.0f, -50.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,	// bottom-left
+	  -50.0f,  50.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f	// top-left
 	};	
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
@@ -51,12 +43,9 @@ void Mesh::Create(Shader* _shader)
 
 	// adding the index data as well
 	m_indexData = {
-		0, 6,  1, 0, 11, 6, 1, 4,  0, 1, 8,  4,
-		1, 10, 8, 2, 5,  3, 2, 9,  5, 2, 11, 9,
-		3, 7,  2, 3, 10, 7, 4, 8,  5, 4, 9,  0,
-		5, 8,  3, 5, 9,  4, 6, 10, 1, 6, 11, 7,
-		7, 10, 6, 7, 11, 2, 8, 10, 3, 9, 11, 0
+		2, 0, 3, 2, 1, 0
 	};
+
 	glGenBuffers(1, &m_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexData.size() * sizeof(GLubyte), m_indexData.data(), GL_STATIC_DRAW);
