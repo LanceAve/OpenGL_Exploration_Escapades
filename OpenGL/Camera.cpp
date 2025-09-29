@@ -1,6 +1,5 @@
 #include "Camera.h"
-// avoids redundant std:: after every method call
-using namespace glm;
+#include "StandardIncludes.h"
 
 Camera::Camera()
 {
@@ -31,7 +30,7 @@ Camera::Camera(Resolution _screenResolution)
 
 	// Camera matrix
 	m_view = lookAt(
-		vec3(200, 200, 200),	// Camera is set to (4, 3, 3) in World Space (can be altered to change camera location
+		vec3(100, 100, 100),	// Camera is set to (100, 100, 100) in World Space (can be altered to change camera location
 		vec3(0, 0, 0),			// and looks at the origin point
 		vec3(0, 1, 0)			// Then head is set to UP (you can set it to (0, -1, 0) to look upside down)
 	);
