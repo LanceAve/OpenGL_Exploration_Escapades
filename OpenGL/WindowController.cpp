@@ -1,4 +1,5 @@
 #include "WindowController.h"
+#include "StandardIncludes.h"
 
 // Initial method that defines WindowController
 WindowController::WindowController()
