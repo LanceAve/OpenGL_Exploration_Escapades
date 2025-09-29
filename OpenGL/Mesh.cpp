@@ -1,8 +1,6 @@
 #include "Mesh.h"
 #include "Shader.h"
-
-// avoids redundant glm:: & std after every method call
-using namespace glm;
+#include "StandardIncludes.h"
 
 Mesh::Mesh()
 {
