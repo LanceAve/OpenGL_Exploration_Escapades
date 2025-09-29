@@ -39,19 +39,6 @@ void GameController::RunGame()
 	{
 		System::Windows::Forms::Application::DoEvents();	// Handle C++/CLI form events
 
-		// commented out since ToolWindow is not being used in this part of the lab
-		//// Red Channel rendering portion
-		//GLint loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderRedChannel");
-		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderRedChannel);
-
-		//// Green Channel rendering portion
-		//loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderGreenChannel");
-		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderGreenChannel);
-
-		//// Blue Channel rendering portion
-		//loc = glGetUniformLocation(m_shader.GetProgramID(), "RenderBlueChannel");
-		//glUniform1i(loc, (int)PrimitiveDrawTest::ToolWindow::RenderBlueChannel);
-
 		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
 		m_mesh.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
 		glfwSwapBuffers(WindowController::GetInstance().GetWindow());	// Swap the back and front buffers
