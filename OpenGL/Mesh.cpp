@@ -5,8 +5,11 @@
 Mesh::Mesh()
 {
 	m_shader = nullptr;
+	m_texture = { };
 	m_vertexBuffer = 0;
 	m_indexBuffer = 0;
+	m_position = { 0, 0, 0 };
+	m_rotation = { 0, 0, 0 };
 	m_world = mat4(1.0f);
 }
 
@@ -60,6 +63,7 @@ void Mesh::Cleanup()
 {
 	glDeleteBuffers(1, &m_vertexBuffer);
 	glDeleteBuffers(1, &m_indexBuffer);
+	m_texture.Cleanup();
 }
 
 // this time define what the Render function does
