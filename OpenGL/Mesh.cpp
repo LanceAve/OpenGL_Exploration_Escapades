@@ -61,7 +61,7 @@ void Mesh::Cleanup()
 
 // this time define what the Render function does
 // and define the world view stuff
-void Mesh::Render(glm::mat4 _wvp)
+void Mesh::Render(mat4 _wvp)
 {
 	glUseProgram(m_shader->GetProgramID());	// use our shader instead of the built-in one
 	
