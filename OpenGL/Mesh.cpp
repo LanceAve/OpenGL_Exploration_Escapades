@@ -85,10 +85,20 @@ void Mesh::Render(glm::mat4 _wvp)
 		7 * sizeof(float),				// stride (now modified)
 		(void*)(3 * sizeof(float)));	// array buffer offset
 	
-	// 3rd attribute : WVP (World-View-Projection)
-	m_world = rotate(m_world, 0.001f, { 0, 1, 0 });		// rotate the world by 1 on the y axis
-	_wvp *= m_world;
-	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &_wvp[0][0]);
+	// 3rd attribute buffer : texCoords
+	glEnableVertexAttribArray(m_shader->GetAttrTexCoords());
+	glVertexAttribPointer(
+		m_shader->GetAttrTexCoords(),	// The attribute we want to configure
+		2,								// size (acounts for the x and y coordinates)
+		GL_FLOAT,						// type
+		GL_FALSE,						// normalized?
+		8 * sizeof(float),				// stride (now modified to 8 floats per vertex def)
+		(void*)(6 * sizeof(float)));	// array buffer offset
+	
+	// 4th attribute : WVP (World-View-Projection)
+	m_rotation.y += 0.005f;	// rotate the object by 5 units on the y axis
+	mat4 transform = rotate(_wvp, m_rotation.y, vec3(0, 1, 0));
+	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &transform[0][0]);
 	
 	// Bind both the vertex and index to reduce memory use
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
