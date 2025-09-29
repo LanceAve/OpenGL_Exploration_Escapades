@@ -24,7 +24,8 @@
 #include "Resolution.h"
 #include "Singleton.h"
 
-// avoids redundant std:: after every method call
-using namespace std;	
+// avoids redundant std:: and glm:: after every method call
+using namespace std;
+using namespace glm;
 
 #endif //STANDARD_INCLUDES_H
