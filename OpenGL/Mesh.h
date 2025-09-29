@@ -2,9 +2,7 @@
 #define MESH_H
 
 #include "StandardIncludes.h"
-// avoids redundant std:: and glm:: after every method call
-using namespace std;
-using namespace glm;
+#include "Texture.h"
 
 class Shader;
 
