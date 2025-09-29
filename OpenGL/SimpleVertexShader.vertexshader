@@ -2,10 +2,12 @@
 
 // now updated to have the shader accept projection matrices
 in vec3 vertices; // value sent from application to this attribute
-in vec4 colors;
+in vec3 colors;
+in vec2 texCoords;
 uniform mat4 WVP;
 
-out vec4 retColor;
+out vec3 retColor;
+out vec2 retTexCoord;
 
 void main()
 {
@@ -13,5 +15,6 @@ void main()
 	// Initial code was used to Pass-through shader, pass positions to next shader
 	// Now it transforms the model to scren projection
 	
-	retColor = colors; // now adding colors stuffsies
+	retColor = colors;			// now adding colors stuffsies
+	retTexCoord = texCoords;	// texture coordinates (which are in xy coordinates)
 }
