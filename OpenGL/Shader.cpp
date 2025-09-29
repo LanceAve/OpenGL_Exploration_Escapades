@@ -1,33 +1,33 @@
-#include "shader.h"
-
+#include "Shader.h"
+#include "StandardIncludes.h"
 
 Shader::Shader()
 {
 	m_programID = 0;
 	m_attrVertices = 0;
 	m_attrColors = 0;
+	m_attrTexCoords = 0;			// *NEW* texture coordinates
+	m_attrWVP = 0;
+	m_sampler1 = 0;					// *NEW* sampler 
 	m_attrWVP = 0;
 	m_result = GL_FALSE;
 	m_infoLogLength = 0;
 }
 
-void Shader::Cleanup()
-{
-	glDeleteProgram(m_programID);
-}
-
 void Shader::LoadAttributes()
 {
-	m_attrVertices = glGetAttribLocation(m_programID, "vertices");	// Get a handle for the vertex buffer
-	m_attrColors = glGetAttribLocation(m_programID, "colors");		// gonna get a handle for colors buffer now too
-	m_attrWVP = glGetUniformLocation(m_programID, "WVP");			// Get a handle for the WVP matrix
+	m_attrVertices = glGetAttribLocation(m_programID, "vertices");		// Get a handle for the vertex buffer
+	m_attrColors = glGetAttribLocation(m_programID, "colors");			// gonna get a handle for colors buffer now too
+	m_attrTexCoords = glGetAttribLocation(m_programID, "texCoords");	// *NEW* Get a handle for the texCoords buffer
+	m_attrWVP = glGetUniformLocation(m_programID, "WVP");				// Get a handle for the WVP matrix
+	m_sampler1 = glGetUniformLocation(m_programID, "sampler1");			// Get a handle for texture sampler 1
 }
 
 void Shader::EvaluateShader(int _infoLength, GLuint _id)
 {
 	if (_infoLength > 0)
 	{
-		std::vector<char> errorMessage(_infoLength + 1);
+		vector<char> errorMessage(_infoLength + 1);
 		glGetShaderInfoLog(_id, _infoLength, NULL, &errorMessage[0]);
 		M_ASSERT(0, ("%s\n", &errorMessage[0]));
 	}
@@ -38,10 +38,10 @@ GLuint Shader::LoadShaderFile(const char* _filePath, GLenum _type)
 	GLuint shaderID = glCreateShader(_type); // Create the shader 
 
 	// Read the Shader code from the file
-	std::string shaderCode;
-	std:ifstream shaderStream(_filePath, std::ios::in);
+	string shaderCode;
+	ifstream shaderStream(_filePath, std::ios::in);
 	M_ASSERT(shaderStream.is_open(), ("Not possible to open %s. Are you sure you are in the correct directory? Please refer to the FAQ if you are having trouble !\n", _filePath));
-	std::string Line = "";
+	string Line = "";
 	while (getline(shaderStream, Line))
 		shaderCode += "\n" + Line;
 	shaderStream.close();
@@ -85,4 +85,9 @@ void Shader::LoadShaders(const char* _vertexFilePath, const char* _fragmentFileP
 {
 	CreateShaderProgram(_vertexFilePath, _fragmentFilePath);
 	LoadAttributes();
+}
+
+void Shader::Cleanup()
+{
+	glDeleteProgram(m_programID);
 }
