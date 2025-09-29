@@ -22,6 +22,10 @@ void Mesh::Create(Shader* _shader)
 {
 	m_shader = _shader;
 
+	// Copy texture to Solution/Assets/Texture folder
+	m_texture = Texture();
+	m_texture.LoadTexture("../Assets/Textures/Wood.jpg");
+	
 	// Good source for float colors (wowzers!)
 	// https://prideout.net/blog/old/archive/colors.php.html#Floats
 	float a = 26.0f;
