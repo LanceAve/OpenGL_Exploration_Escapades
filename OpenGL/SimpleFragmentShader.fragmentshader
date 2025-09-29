@@ -1,10 +1,13 @@
 #version 330 // OpenGL version 3.30 (modified the requirement)
 
-in vec4 retColor;		// MUST use the name as the out variable that's used by the vertex shader
+in vec3 retColor;		// MUST use the name as the out variable that's used by the vertex shader
+in vec2 retTexCoord; 
+
 out vec4 FragColor;		
+uniform sampler2D sampler1;
 
 void main() 
 {
-	FragColor = retColor;
-	// Removing the color selection buffer (remove tool window later)
+	// will only load texture, with no color info (for now)
+	FragColor = texture(sampler1, retTexCoord);
 }
