@@ -21,10 +21,13 @@ public:
 
 private:
 	Shader* m_shader;						// then define the variable
+	Texture m_texture;						// adding texture as well to use with shader
 	GLuint m_vertexBuffer;					// stored in GPU buffer
 	GLuint m_indexBuffer;					// store in GPU buffer
 	vector<GLfloat> m_vertexData;			// store the vertex data in RAM
-	vector<GLubyte> m_indexData;			// notice that it uses the GLubyte type (also index buffer gets stored in RAM as well)
+	vector<GLubyte> m_indexData;			// notice that it uses the GLubyte type (also index buffer gets stored in RAM)
+	vec3 m_position;						// location definition for texture mapping (probably?)
+	vec3 m_rotation;						// rotation definition for texture mapping
 	mat4 m_world;
 };
 
