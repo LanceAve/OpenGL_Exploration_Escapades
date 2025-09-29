@@ -1,9 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "..\OpenGL\StandardIncludes.h"
-// avoids redundant std:: after every method call
-using namespace glm;
+#include "StandardIncludes.h"
 
 // define Camera class responsible for... well, camera functions
 class Camera
