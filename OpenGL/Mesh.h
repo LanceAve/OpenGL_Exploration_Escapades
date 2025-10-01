@@ -16,12 +16,13 @@ public:
 	// Methods
 	void Create(Shader* _shader);	// now we add shader in the mix
 	void Cleanup();
-	void Render(glm::mat4 _wvp);	// each mesh will have it's own projection
+	void Render(mat4 _wvp);			// each mesh will have it's own projection
 									// so that they don't overlap unto each other
 
 private:
 	Shader* m_shader;						// then define the variable
 	Texture m_texture;						// adding texture as well to use with shader
+	Texture m_texture2;						// *NEW* adding one for the second texture that will be layered on-top (whoop whoop!~)
 	GLuint m_vertexBuffer;					// stored in GPU buffer
 	GLuint m_indexBuffer;					// store in GPU buffer
 	vector<GLfloat> m_vertexData;			// store the vertex data in RAM
