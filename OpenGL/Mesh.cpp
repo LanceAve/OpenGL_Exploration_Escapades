@@ -26,6 +26,10 @@ void Mesh::Create(Shader* _shader)
 	m_texture = Texture();
 	m_texture.LoadTexture("../Assets/Textures/Wood.jpg");
 	
+	// finally, we do the forbidden and layer two textures onto each other
+	m_texture2 = Texture();
+	m_texture2.LoadTexture("../Assets/Textures/Emoji.jpg");
+	
 	// Good source for float colors (wowzers!)
 	// https://prideout.net/blog/old/archive/colors.php.html#Floats
 
