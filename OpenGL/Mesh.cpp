@@ -63,6 +63,7 @@ void Mesh::Cleanup()
 	glDeleteBuffers(1, &m_vertexBuffer);
 	glDeleteBuffers(1, &m_indexBuffer);
 	m_texture.Cleanup();
+	m_texture2.Cleanup();					// gotta clean up that text2 babe
 }
 
 // this time define what the Render function does
