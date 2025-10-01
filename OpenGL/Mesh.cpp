@@ -26,7 +26,7 @@ void Mesh::Create(Shader* _shader)
 	// Copy texture to Solution/Assets/Texture folder
 	m_texture = Texture();
 	m_texture.LoadTexture("../Assets/Textures/Wood.jpg");
-	
+
 	// finally, we do the forbidden and layer two textures onto each other
 	m_texture2 = Texture();
 	m_texture2.LoadTexture("../Assets/Textures/Emoji.jpg");
@@ -57,7 +57,7 @@ void Mesh::Create(Shader* _shader)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexData.size() * sizeof(GLubyte), m_indexData.data(), GL_STATIC_DRAW);
 }
 
-// define what the cleanup function does (used to delete the mesh)
+// define what the cleanup function does (used for garbage collection)
 void Mesh::Cleanup()
 {
 	glDeleteBuffers(1, &m_vertexBuffer);
@@ -108,11 +108,18 @@ void Mesh::Render(mat4 _wvp)
 	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &transform[0][0]);
 	
 	// Bind both the vertex and index to reduce memory use
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer); 
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);			// vertex
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);	// index
 
-	// Bind the texture now too
-	glBindTexture(GL_TEXTURE_2D, m_texture.GetTexture());
+	// binding texture one to texture unit 0 (up to 16 in OpenGL)
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture.GetTexture());	// Bind the texture now too
+	glUniform1i(m_shader->GetSampler1(), 0);
+
+	// bind texture two to be layered on texture 1
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_texture2.GetTexture());	// Bind the texture now too
+	glUniform1i(m_shader->GetSampler2(), 1);				// notice how it's 1 now.
 
 	// draw a triangle element
 	glDrawElements(GL_TRIANGLES, m_indexData.size(), GL_UNSIGNED_BYTE, (void*)0);
