@@ -6,6 +6,7 @@ Mesh::Mesh()
 {
 	m_shader = nullptr;
 	m_texture = { };
+	m_texture2 = { };
 	m_vertexBuffer = 0;
 	m_indexBuffer = 0;
 	m_position = { 0, 0, 0 };
