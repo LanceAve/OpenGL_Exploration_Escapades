@@ -33,8 +33,9 @@ void Texture::LoadTexture(string _fileName)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); // use smooth filtering + mipmaps when minifying
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);				// use smooth filtering when magnifying
 
-	// Load and generate the texture
-	GLubyte* data = stbi_load(_fileName.c_str(), &m_width, &m_height, &m_channels, 0);	
+	
+	stbi_set_flip_vertically_on_load(true);												// flip iamge's y-axis 
+	GLubyte* data = stbi_load(_fileName.c_str(), &m_width, &m_height, &m_channels, 0);	// Load and generate the texture
 
 	// load image file into RAM, get width/height/channels
 	M_ASSERT(data != nullptr, "Failed to load texture from file");									// crash (or halt execution) if load fails
