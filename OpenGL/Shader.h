@@ -15,6 +15,7 @@ public:
 	GLuint GetAttrVertices() { return m_attrVertices; }
 	GLuint GetAttrColors() { return m_attrColors; }			// adding color accessor now
 	GLuint GetAttrTexCoords() { return m_attrTexCoords; }	// accessor for texture coordinates
+	GLuint GetSampler1() { return m_sampler1; }				// sampler accessor method
 	GLuint GetAttrWVP() { return m_attrWVP; }				// allow access to WVP
 
 	// Methods
