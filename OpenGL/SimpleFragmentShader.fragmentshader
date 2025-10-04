@@ -11,7 +11,7 @@ void main()
 {
 	// will only load texture, with no color info (for now)
 	// FragColor = texture(sampler1, retTexCoord);																	// Example 1 - with textures only (told ya ;)
-	// FragColor = texture(sampler1, retTexCoord) * vec4(retColor, 1.0f);											// Example 2 - Texture and colors (Whooo!!!)
+	FragColor = texture(sampler1, retTexCoord) * vec4(retColor, 1.0f);												// Example 2 - Texture and colors (Whooo!!!)
 	// FragColor = mix(texture(sampler1, retTexCoord), texture(sampler2, retTexCoord), 0.3);						// Example 3 - Layering two textures
-	FragColor = mix(texture(sampler1, retTexCoord), texture(sampler2, retTexCoord), 0.3) * vec4(retColor, 1.0f);	// Example 4 - Layer two textures, with colors now
+	// FragColor = mix(texture(sampler1, retTexCoord), texture(sampler2, retTexCoord), 0.3) * vec4(retColor, 1.0f);	// Example 4 - Layer two textures, with colors now
 }

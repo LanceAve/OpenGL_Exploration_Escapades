@@ -22,7 +22,7 @@ public:
 private:
 	Shader* m_shader;						// then define the variable
 	Texture m_texture;						// adding texture as well to use with shader
-	Texture m_texture2;						// *NEW* adding one for the second texture that will be layered on-top (whoop whoop!~)
+	// Texture m_texture2;						// *NEW* adding one for the second texture that will be layered on-top (whoop whoop!~)
 	GLuint m_vertexBuffer;					// stored in GPU buffer
 	GLuint m_indexBuffer;					// store in GPU buffer
 	vector<GLfloat> m_vertexData;			// store the vertex data in RAM

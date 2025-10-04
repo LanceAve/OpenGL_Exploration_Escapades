@@ -6,7 +6,7 @@ Mesh::Mesh()
 {
 	m_shader = nullptr;
 	m_texture = { };
-	m_texture2 = { };
+	// m_texture2 = { };
 	m_vertexBuffer = 0;
 	m_indexBuffer = 0;
 	m_position = { 0, 0, 0 };
@@ -24,24 +24,54 @@ void Mesh::Create(Shader* _shader)
 	m_shader = _shader;
 
 	// Copy texture to Solution/Assets/Texture folder
+	// Texture obtained from: https://paulbourke.net/panorama/icosahedral/
 	m_texture = Texture();
-	m_texture.LoadTexture("../Assets/Textures/Wood.jpg");
+	m_texture.LoadTexture("../Assets/Textures/Icosahedron_flat.png");
 
 	// finally, we do the forbidden and layer two textures onto each other
-	m_texture2 = Texture();
-	m_texture2.LoadTexture("../Assets/Textures/Emoji.jpg");
+	/*m_texture2 = Texture();
+	m_texture2.LoadTexture("../Assets/Textures/Emoji.jpg");*/
+
+
 	
 	// Good source for float colors (wowzers!)
 	// https://prideout.net/blog/old/archive/colors.php.html#Floats
 
-	// changing shape to a square for now, but would like to attempt to do it on an icosahedron
-	m_vertexData = { 
-	   /*   Position     */ /* RGBA Color  */ /* Texture Coords */
-	   50.0f,  50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,	// top-right
-	   50.0f, -50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,	// bottom-right	
-	  -50.0f, -50.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,	// bottom-left
-	  -50.0f,  50.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f	// top-left
+	// Experimenting with readding the Icosahedron with a texture that will adopt to it's dimensions
+	float a = 26.0f;
+	float b = 42.0f;
+	constexpr float PI = 3.14159265359f;
+	
+	// Icosahedron vertices (positions only)
+	vector<vec3> positions = {
+		{-a, 0.0f,  b}, { a, 0.0f,  b}, {-a, 0.0f, -b}, { a, 0.0f, -b},
+		{0.0f,  b,  a}, {0.0f,  b, -a}, {0.0f, -b,  a}, {0.0f, -b, -a},
+		{ b,  a, 0.0f}, {-b,  a, 0.0f}, { b, -a, 0.0f}, {-b, -a, 0.0f}
 	};
+
+	// Build full vertex array: pos + color + texcoords
+	m_vertexData.clear();
+	for (auto& pos : positions) {
+		float x = pos.x, y = pos.y, z = pos.z;
+
+		// ---- position ----
+		m_vertexData.push_back(x);
+		m_vertexData.push_back(y);
+		m_vertexData.push_back(z);
+
+		// ---- color (quick: map to [0,1] using abs) ----
+		m_vertexData.push_back(fabs(x) / b);
+		m_vertexData.push_back(fabs(y) / b);
+		m_vertexData.push_back(fabs(z) / b);
+
+		// ---- spherical UVs ----
+		float radius = sqrt(x * x + y * y + z * z);
+		float u = 0.5f + atan2(z, x) / (2.0f * PI);
+		float v = 0.5f - asin(y / radius) / PI;
+
+		m_vertexData.push_back(u);
+		m_vertexData.push_back(v);
+	}
 
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
@@ -49,9 +79,12 @@ void Mesh::Create(Shader* _shader)
 
 	// adding the index data as well
 	m_indexData = {
-		2, 0, 3, 2, 1, 0
+		0, 6,  1, 0, 11, 6, 1, 4,  0, 1, 8,  4,
+		1, 10, 8, 2, 5,  3, 2, 9,  5, 2, 11, 9,
+		3, 7,  2, 3, 10, 7, 4, 8,  5, 4, 9,  0,
+		5, 8,  3, 5, 9,  4, 6, 10, 1, 6, 11, 7,
+		7, 10, 6, 7, 11, 2, 8, 10, 3, 9, 11, 0
 	};
-
 	glGenBuffers(1, &m_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexData.size() * sizeof(GLubyte), m_indexData.data(), GL_STATIC_DRAW);
@@ -63,7 +96,7 @@ void Mesh::Cleanup()
 	glDeleteBuffers(1, &m_vertexBuffer);
 	glDeleteBuffers(1, &m_indexBuffer);
 	m_texture.Cleanup();
-	m_texture2.Cleanup();					// gotta clean up that text2 babe
+	// m_texture2.Cleanup();					// gotta clean up that text2 babe
 }
 
 // this time define what the Render function does
@@ -103,7 +136,7 @@ void Mesh::Render(mat4 _wvp)
 		(void*)(6 * sizeof(float)));	// array buffer offset
 	
 	// 4th attribute : WVP (World-View-Projection)
-	m_rotation.y += 0.005f;	// rotate the object by 5 units on the y axis
+	m_rotation.y += 0.001f;	// rotate the object by 5 units on the y axis
 	mat4 transform = rotate(_wvp, m_rotation.y, vec3(0, 1, 0));
 	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &transform[0][0]);
 	
@@ -117,9 +150,9 @@ void Mesh::Render(mat4 _wvp)
 	glUniform1i(m_shader->GetSampler1(), 0);
 
 	// bind texture two to be layered on texture 1
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, m_texture2.GetTexture());	// Bind the texture now too
-	glUniform1i(m_shader->GetSampler2(), 1);				// notice how it's 1 now.
+	//glActiveTexture(GL_TEXTURE1);
+	//glBindTexture(GL_TEXTURE_2D, m_texture2.GetTexture());	// Bind the texture now too
+	//glUniform1i(m_shader->GetSampler2(), 1);				// notice how it's 1 now.
 
 	// draw a triangle element
 	glDrawElements(GL_TRIANGLES, m_indexData.size(), GL_UNSIGNED_BYTE, (void*)0);
