@@ -39,6 +39,10 @@ private:
 	GLuint m_attrWVP;
 	GLuint m_sampler1;				// sampler for first example (more to come)
 	GLuint m_sampler2;				// sampler for second example (foreshadowing paid off :v )
+	GLuint m_uniformY;
+	GLuint m_uniformU;
+	GLuint m_uniformV;
+	GLuint m_invert;
 	GLint m_result = GL_FALSE;
 	int	m_infoLogLength;
 };
