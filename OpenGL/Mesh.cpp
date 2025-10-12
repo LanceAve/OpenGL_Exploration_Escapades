@@ -104,9 +104,8 @@ void Mesh::Render(mat4 _wvp)
 	
 	// 4th attribute : WVP (World-View-Projection)
 	//m_rotation.y += 0.005f;	// rotate the object by 5 units on the y axis
-	//mat4 transform = rotate(_wvp, m_rotation.y, vec3(0, 1, 0));
-	//glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &transform[0][0]);
-	mat4 transform = _wvp * m_world; // no rotation, just apply current world/view/projection
+	mat4 transform = _wvp * m_world;
+	glUniformMatrix4fv(m_shader->GetAttrWVP(), 1, GL_FALSE, &transform[0][0]);
 	
 	// Bind both the vertex and index to reduce memory use
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);			// vertex

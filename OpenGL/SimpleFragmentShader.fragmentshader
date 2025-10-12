@@ -8,43 +8,43 @@ out vec4 FragColor;
 uniform sampler2D sampler1;
 uniform sampler2D sampler2;
 
-uniform float Yscale;
-uniform float Uscale;
-uniform float Vscale;
-uniform bool InvertColors;
+uniform float Yscale;      // 0.0 .. 2.0 (from 0..200 slider / 100)
+uniform float Uscale;      // 0.0 .. 2.0
+uniform float Vscale;      // 0.0 .. 2.0
+uniform bool  InvertColors;
 
-void main()
-{
-	vec3 rgb = mix(texture(sampler1, retTexCoord).rgb, texture(sampler2, retTexCoord).rgb, 0.3);
+// sRGB (texture) -> linear helper (optional, keeps it simple here we skip gamma)
+vec3 toYUV(vec3 rgb) {
+    float Y = 0.299*rgb.r + 0.587*rgb.g + 0.114*rgb.b;
+    float U = -0.14713*rgb.r - 0.28886*rgb.g + 0.436*rgb.b;
+    float V =  0.615*rgb.r - 0.51499*rgb.g - 0.10001*rgb.b;
+    return vec3(Y, U, V);
+}
 
-	// RGB -> YUV
-	mat3 rgb2yuv = mat3
-	(
-		 0.299,     0.587,    0.114,
-		-0.14713,  -0.28886,  0.436,
-		 0.615,    -0.51499, -0.10001
-	);
-	vec3 yuv = rgb2yuv * rgb;
+vec3 toRGB(vec3 yuv) {
+    float Y = yuv.x, U = yuv.y, V = yuv.z;
+    float r = Y + 1.13983*V;
+    float g = Y - 0.39465*U - 0.58060*V;
+    float b = Y + 2.03211*U;
+    return vec3(r,g,b);
+}
 
-	// Apply user scaling
-	yuv.x *= Yscale;
-	yuv.y *= Uscale;
-	yuv.z *= Vscale;
+void main() {
+    // your original layering + per-vertex color
+    vec4 tex1 = texture(sampler1, retTexCoord);
+    vec4 tex2 = texture(sampler2, retTexCoord);
+    vec3 base = mix(tex1, tex2, 0.3).rgb * retColor;
 
-	// YUV -> RGB
-	mat3 yuv2rgb = mat3(
-		1.0,  0.0,      1.13983,
-		1.0, -0.39465, -0.58060,
-		1.0,  2.03211,  0.0
-	);
-	vec3 adjustedRGB = yuv2rgb * yuv;
+    // convert, scale, convert back
+    vec3 yuv = toYUV(base);
+    yuv.x *= Yscale;   // Y
+    yuv.y *= Uscale;   // U
+    yuv.z *= Vscale;   // V
+    vec3 rgb = toRGB(yuv);
 
-	// Clamp to [0, 1]
-	adjustedRGB = clamp(adjustedRGB, 0.0, 1.0);
+    if (InvertColors) {
+        rgb = vec3(1.0) - rgb;
+    }
 
-	// Invert if checkbox enabled
-	if (InvertColors)
-		adjustedRGB = vec3(1.0) - adjustedRGB;
-
-	FragColor = vec4(adjustedRGB, 1.0);
+    FragColor = vec4(clamp(rgb, 0.0, 1.0), 1.0);
 }
