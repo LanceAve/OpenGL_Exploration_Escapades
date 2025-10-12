@@ -24,9 +24,9 @@ void GameController::Initialize()
 
 void GameController::RunGame()
 {
-	//// Show the C++/CLI tool window
-	//PrimitiveDrawTest::ToolWindow^ window = gcnew PrimitiveDrawTest::ToolWindow();
-	//window->Show();
+	// Show the C++/CLI tool window
+	PrimitiveDrawTest::ToolWindow^ window = gcnew PrimitiveDrawTest::ToolWindow();
+	window->Show();
 
 	// Create and compile our GLSL program from the shaders
 	m_shader = Shader();
@@ -38,8 +38,30 @@ void GameController::RunGame()
 	do
 	{
 		System::Windows::Forms::Application::DoEvents();	// Handle C++/CLI form events
+		
+		// Convert 0..200 slider to 0.0..2.0 multiplier for shader
+		GLfloat yScale = PrimitiveDrawTest::ToolWindow::YValue / 100.0f;
+		GLfloat uScale = PrimitiveDrawTest::ToolWindow::UValue / 100.0f;
+		GLfloat vScale = PrimitiveDrawTest::ToolWindow::VValue / 100.0f;
+		GLint loc;
 
-		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
+		// set Yscale
+		loc = glGetUniformLocation(m_shader.GetProgramID(), "Yscale");
+		glUniform1f(loc, yScale);
+
+		// set Uscale
+		loc = glGetUniformLocation(m_shader.GetProgramID(), "Uscale");
+		glUniform1f(loc, uScale);
+
+		// set Vscale
+		loc = glGetUniformLocation(m_shader.GetProgramID(), "Vscale");
+		glUniform1f(loc, vScale);
+
+		// set invert bool
+		loc = glGetUniformLocation(m_shader.GetProgramID(), "InvertColors");
+		glUniform1i(loc, PrimitiveDrawTest::ToolWindow::InvertColors ? 1 : 0);
+
+		glClear(GL_COLOR_BUFFER_BIT);									// Clear the screen
 		m_mesh.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
 		glfwSwapBuffers(WindowController::GetInstance().GetWindow());	// Swap the back and front buffers
 		glfwPollEvents();
