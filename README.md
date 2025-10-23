@@ -40,7 +40,7 @@ This is how I structure the project in Visual Studio. This doesn't really mean a
 # Branches
 This repository makes use of branches. Each branch builds from the previous one, so... as I further get through the material, you'll see things shuffling around and more stuff being added in. Nothing earth-shattering. Just me getting through the material and the such. 
 
-You'll notice that there are some branches were I go on off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. Stuff that did work will be given an abreviation with the readme updated to reflect what was acheived. You'll see what I mean later, don't worry.
+You'll notice that there are some branches were I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. Stuff that did work will be given an abreviation with the readme updated to reflect what was acheived. You'll see what I mean later, don't worry.
 
 # License
 License? You can do whatever you want with this code.
