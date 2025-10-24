@@ -43,6 +43,6 @@ This repository makes use of branches. Each branch builds from the previous one,
 You'll notice that there are some branches were I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. Stuff that did work will be given an abreviation with the readme updated to reflect what was acheived. You'll see what I mean later, don't worry.
 
 # License
-License? Check [Here](/README.md) if you're interested in that sort of thing.
+License? Check [Here](README.md) if you're interested in that sort of thing.
 
 
