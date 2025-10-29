@@ -14,6 +14,7 @@ public:
 	GLuint GetProgramID() { return m_programID; }
 	GLuint GetAttrVertices() { return m_attrVertices; }
 	GLuint GetAttrColors() { return m_attrColors; }			// adding color accessor now
+	GLuint GetAttrNormals() { return m_attrNormals; }		// accessor for the normals
 	GLuint GetAttrTexCoords() { return m_attrTexCoords; }	// accessor for texture coordinates
 	GLuint GetSampler1() { return m_sampler1; }				// accessor for the sampler 1
 	GLuint GetSampler2() { return m_sampler2; }				// accessor for sampler 2 (to layer textures on each other)
@@ -22,6 +23,7 @@ public:
 	// Methods
 	void LoadShaders(const char* _vertexFilePath, const char* _fragementFilePath);
 	void Cleanup();
+	void SetVec3(const char* _name, vec3 _value);
 	
 
 private:
@@ -35,6 +37,7 @@ private:
 	GLuint m_programID;				// ID of our shader program
 	GLuint m_attrVertices;			// Handle for the attribute vertex buffer
 	GLuint m_attrColors;			// Color attribute now sick
+	GLuint m_attrNormals;			// Normals attribute
 	GLuint m_attrTexCoords;			// adding in texture coordinates member now
 	GLuint m_attrWVP;
 	GLuint m_sampler1;				// sampler for first example (more to come)
