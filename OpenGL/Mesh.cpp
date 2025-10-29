@@ -120,10 +120,10 @@ void Mesh::Render(mat4 _wvp)
 		8 * sizeof(float),				// stride (8 floats now per vertex definition)
 		(void*)0);						// array buffer offset
 
-	// 2nd attribute buffer : colors
-	glEnableVertexAttribArray(m_shader->GetAttrColors());
+	// 2nd attribute buffer : normals
+	glEnableVertexAttribArray(m_shader->GetAttrNormals());
 	glVertexAttribPointer(
-		m_shader->GetAttrColors(),		// The attribute we want to configure
+		m_shader->GetAttrNormals(),		// The attribute we want to configure
 		3,								// size (modified to 3 now)
 		GL_FLOAT,						// type
 		GL_FALSE,						// normalized?
@@ -160,10 +160,10 @@ void Mesh::Render(mat4 _wvp)
 	glUniform1i(m_shader->GetSampler2(), 1);				// notice how it's 1 now.
 
 	// draw a triangle element
-	glDrawElements(GL_TRIANGLES, m_indexData.size(), GL_UNSIGNED_BYTE, (void*)0);
+	glDrawArrays(GL_TRIANGLES, 0, m_vertexData.size());
 	
-	// turn off color, vertex and texture coordinate data after draw call
-	glDisableVertexAttribArray(m_shader->GetAttrColors());
+	// turn off normal, vertex and texture coordinate data after draw call
+	glDisableVertexAttribArray(m_shader->GetAttrNormals());
 	glDisableVertexAttribArray(m_shader->GetAttrVertices());
 	glDisableVertexAttribArray(m_shader->GetAttrTexCoords());
 }
