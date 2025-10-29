@@ -15,7 +15,7 @@ void GameController::Initialize()
 	M_ASSERT(glewInit() == GLEW_OK, "Failed to initialize GLEW.");		// Initialize GLEW
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);				// Make sure that we can capture the escape key if it's pressed
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);								// Changed to Black backgroun now (can be deduced using art program)
-	glEnable(GL_CULL_FACE);												// prevents face of mesh from being displayed on both sides
+	glEnable(GL_DEPTH_TEST);											// prevents face of mesh from being displayed on both sides
 
 
 	// Create the default perspective camera
@@ -30,7 +30,7 @@ void GameController::RunGame()
 
 	// Create and compile our GLSL program from the shaders
 	m_shader = Shader();
-	m_shader.LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentShader");
+	m_shader.LoadShaders("Diffuse.vertexshader", "Diffuse.fragmentShader");
 	
 	m_mesh = Mesh();
 	m_mesh.Create(&m_shader);
@@ -39,7 +39,7 @@ void GameController::RunGame()
 	{
 		System::Windows::Forms::Application::DoEvents();	// Handle C++/CLI form events
 
-		glClear(GL_COLOR_BUFFER_BIT);	// Clear the screen
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);				// Clear the screen
 		m_mesh.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
 		glfwSwapBuffers(WindowController::GetInstance().GetWindow());	// Swap the back and front buffers
 		glfwPollEvents();
