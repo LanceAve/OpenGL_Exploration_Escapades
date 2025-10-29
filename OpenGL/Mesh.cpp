@@ -108,7 +108,8 @@ void Mesh::Cleanup()
 // and define the world view stuff
 void Mesh::Render(mat4 _wvp)
 {
-	glUseProgram(m_shader->GetProgramID());	// use our shader instead of the built-in one
+	glUseProgram(m_shader->GetProgramID());						// use our shader instead of the built-in one
+	m_shader->SetVec3("DiffuseColor", { 1.0, 0.0f, 0.0f });		// render both texture and diffuse color (set to red)
 	
 	// 1st attribute buffer : vertices
 	glEnableVertexAttribArray(m_shader->GetAttrVertices());
