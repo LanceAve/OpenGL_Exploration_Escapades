@@ -6,6 +6,7 @@ Shader::Shader()
 	m_programID = 0;
 	m_attrVertices = 0;
 	m_attrColors = 0;
+	m_attrNormals = 0;				// *NEW* normals to help calculate light
 	m_attrTexCoords = 0;			// *NEW* texture coordinates
 	m_attrWVP = 0;
 	m_sampler1 = 0;					// *NEW* sampler 1
@@ -19,6 +20,7 @@ void Shader::LoadAttributes()
 {
 	m_attrVertices = glGetAttribLocation(m_programID, "vertices");		// Get a handle for the vertex buffer
 	m_attrColors = glGetAttribLocation(m_programID, "colors");			// gonna get a handle for colors buffer now too
+	m_attrNormals = glGetAttribLocation(m_programID, "normals");		// getting the normals as well
 	m_attrTexCoords = glGetAttribLocation(m_programID, "texCoords");	// *NEW* Get a handle for the texCoords buffer
 	m_attrWVP = glGetUniformLocation(m_programID, "WVP");				// Get a handle for the WVP matrix
 	m_sampler1 = glGetUniformLocation(m_programID, "sampler1");			// *NEW* Get a handle for texture sampler 1
@@ -32,6 +34,19 @@ void Shader::EvaluateShader(int _infoLength, GLuint _id)
 		vector<char> errorMessage(_infoLength + 1);
 		glGetShaderInfoLog(_id, _infoLength, NULL, &errorMessage[0]);
 		M_ASSERT(0, ("%s\n", &errorMessage[0]));
+	}
+}
+// sets a vec3 uniform variable in currently active shader program
+void Shader::SetVec3(const char* _name, vec3 _value)
+{
+	// find location of uniform variable
+	GLuint loc = glGetUniformLocation(m_programID, _name);
+	
+	// does it exist?
+	if (loc != -1)
+	{
+		// upload value to that uniform location in GPU
+		glUniform3fv(loc, 1, &_value[0]);
 	}
 }
 
