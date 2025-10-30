@@ -16,10 +16,28 @@ public:
 	// Methods
 	void Create(Shader* _shader);	// now we add shader in the mix
 	void Cleanup();
-	void Render(mat4 _wvp);			// each mesh will have it's own projection
 									// so that they don't overlap unto each other
+	void CalculateTransform();
+	void Render(mat4 _pv);			// each mesh will have it's own projection
+
+	// Accessors
+
+	// getters and setters for position and scale
+	void SetPosition(vec3 _position) { m_position = _position; }
+	vec3 GetPosition() { return m_position; }
+	void SetScale(vec3 _scale) { m_scale = _scale; }
+
+	// setter for lighting position and lighting color
+	void SetLightPosition(vec3 _lightPosition) { m_lightPosition = _lightPosition; }
+	void SetLightColor(vec3 _lightColor) { m_lightColor = _lightColor; }
 
 private:
+
+	// Private Methods
+	void SetShaderVariables(mat4 _pv);
+	void BindAttributes();
+
+	// Member Variables
 	Shader* m_shader;						// then define the variable
 	Texture m_texture;						// adding texture as well to use with shader
 	Texture m_texture2;						// *NEW* adding one for the second texture that will be layered on-top (whoop whoop!~)
@@ -27,9 +45,16 @@ private:
 	GLuint m_indexBuffer;					// store in GPU buffer
 	vector<GLfloat> m_vertexData;			// store the vertex data in RAM
 	vector<GLubyte> m_indexData;			// notice that it uses the GLubyte type (also index buffer gets stored in RAM)
-	vec3 m_position;						// location definition for texture mapping (probably?)
-	vec3 m_rotation;						// rotation definition for texture mapping
+
+	// Transformation (scale, position)
+	vec3 m_position;
+	vec3 m_rotation;
+	vec3 m_scale;
 	mat4 m_world;
+
+	// Lighting
+	vec3 m_lightPosition;
+	vec3 m_lightColor;
 };
 
 #endif // MESH_H
