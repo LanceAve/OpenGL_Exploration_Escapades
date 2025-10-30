@@ -52,6 +52,16 @@ void Shader::SetVec3(const char* _name, vec3 _value)
 
 void Shader::SetMat4(const char* _name, mat4 _value)
 {
+	GLuint loc = glGetUniformLocation(m_programID, _name);
+
+	if (loc != -1)
+	{
+		glUniformMatrix4fv(loc, 1, GL_FALSE ,&_value[0][0]);
+	}
+}
+
+void Shader::SetFloat(const char* _name, float _value)
+{
 	// find location of uniform variable
 	GLuint loc = glGetUniformLocation(m_programID, _name);
 
@@ -59,7 +69,7 @@ void Shader::SetMat4(const char* _name, mat4 _value)
 	if (loc != -1)
 	{
 		// upload value to that uniform location in GPU
-		glUniformMatrix4fv(loc, 1, GL_FALSE ,&_value[0][0]);
+		glUniform1f(loc, _value);
 	}
 }
 
