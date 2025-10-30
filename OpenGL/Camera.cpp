@@ -5,10 +5,12 @@ Camera::Camera()
 {
 	m_projection = { };
 	m_view = { };
+	m_position = { };
 }
 
 Camera::Camera(Resolution _screenResolution)
 {
+	m_position = { 2, 2, 2 };
 	/* Projection matrix specs:
 		45° FoV
 		4:3 aspect ration
@@ -30,7 +32,7 @@ Camera::Camera(Resolution _screenResolution)
 
 	// Camera matrix
 	m_view = lookAt(
-		vec3(2, 2, 2),			// camera altered to 2 since objects are smaller
+		m_position,				// camera altered to 2 since objects are smaller
 		vec3(0, 0, 0),			// and looks at the origin point
 		vec3(0, 1, 0)			// Then head is set to UP (you can set it to (0, -1, 0) to look upside down)
 	);

@@ -15,11 +15,13 @@ public:
 	// Accessors
 	mat4 GetProjection() { return m_projection; }
 	mat4 GetView() { return m_view; }
+	vec3 GetPosition() { return m_position; }
 
 private:
 	// Members
 	mat4 m_projection;
 	mat4 m_view;
+	vec3 m_position;
 
 };
 
