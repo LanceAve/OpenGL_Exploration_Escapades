@@ -24,6 +24,7 @@ public:
 	void LoadShaders(const char* _vertexFilePath, const char* _fragementFilePath);
 	void Cleanup();
 	void SetVec3(const char* _name, vec3 _value);
+	void SetMat4(const char* _name, mat4 _value);
 	
 
 private:
