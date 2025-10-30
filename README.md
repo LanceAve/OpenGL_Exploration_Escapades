@@ -18,8 +18,9 @@ I'll mention any external libraries I used here so it's just left for future ref
 more to come...
 
 # Buidling
+**NOTE: This project in it's current form only supports Windows, x86/64 platforms. If you want to try and use it on others, you're more than welcome to give it a shot, but I can't help you in that regard. I am planning to figure out how to port it eventually, but that's not the focus of this at the minute.** 
 
-Fairly simple, you see:
+Anyhow, with that out of the way. Building is fairly straightforward you see:
 
 <img width="340" height="auto" alt="image" src="https://github.com/user-attachments/assets/8707b7da-715e-4ef6-9c02-9376f23eae3b" />
 
@@ -44,7 +45,9 @@ You'll notice that there are some branches where I go off on a tangent. Some wil
 
 While I have you here, you might as well take a look at what each branch is all about. If you want to, at least. Here's a little table that shows them off. It's gonna get updated as more shows up. You get a little link to follow too. Isn't that nice?
 
-| Branch Name                                               | Where is that?                                                                      | What is that?                                                                 | Status       |
+**_FYI: I noticed a bunch of them shouldn't really have their own branches. I'll do some housekeeping at some point and merge them into each other. That won't happen anytime soon though._**
+
+| **Branch Name**                                           | **Where is that?**                                                                  | **What is that?**                                                             | **Status**   |
 | --------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------ |
 | 1.0_project_setup                                         | [View Branch](../../tree/1.0_project_setup)                                         | Setting up the project. Just the very rough skeleton.                         | Active       |
 | 2.1_triangle_draw                                         | [View Branch](../../tree/2.1_triangle_draw)                                         | First mesh drawn and it's a triangle using OpenGL! Very cool!                 | Active       |
@@ -67,11 +70,9 @@ While I have you here, you might as well take a look at what each branch is all 
 | 5.3.1_square_layered_flipped_texture_rotate_color         | [View Branch](../../tree/5.3.1_square_layered_flipped_texture_rotate_color)         | Micro commit that just flips the emoji texture orientation. Merge probably.   | Deprecated   |
 | 5.3.2_square_layered_flipped_texture_rotate_color_channel | [View Branch](../../tree/5.3.2_square_layered_flipped_texture_rotate_color_channel) | Same square but now has flipped layered textures with color-channels!         | Active       |
 | ~~5.3.2.1_icosahedron_UV_junk~~                           | [View Branch](../../tree/5.3.2.1_icosahedron_UV_junk)                               | Failed experimental UV-mapping that was meant to wrap an icosahedron;         | Experimental |
-| 5.4_square_texture_RGB_to_YUV                             | [View Branch](../../tree/5.4_square_texture_RGB_to_YUV)                             | RGP to YUV converter that worked like a charm! Uses tool window with a slider.| Active       |
-| ~~6.0_square_texture_layered~~                            | [View Branch](../../tree/6.0_square_texture_layered)                                | Most probably a duplicate of 5.3.2. Gonna clean it up eventually.             | Deprecated   |
-
-
-
+| 5.4_square_texture_RGB_to_YUV                             | [View Branch](../../tree/5.4_square_texture_RGB_to_YUV)                             | RGB to YUV converter that worked like a charm! Uses tool window with a slider.| Active       |
+| 6.1_lighting_diffuse_setup                                | [View Branch](../../tree/6.1_lighting_diffuse_setup)                                | Initial setup for lighting. Currently contains just Diffuse lighting so far.  | Active       |
+| 6.2_lighting_phong_diffuse_specular                       | [View Branch](../../tree/6.2_lighting_phong_diffuse_specular)                       | Modification of 6.1 that includes specular and phong lighting.                | Active       |
 
 # License
 License? Check [Here](LICENSE.md) if you're interested in that sort of thing.
