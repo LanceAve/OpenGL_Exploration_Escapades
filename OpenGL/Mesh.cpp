@@ -163,14 +163,24 @@ void Mesh::CalculateTransform()
 
 void Mesh::SetShaderVariables(mat4 _pv)
 {
+	// World
 	m_shader->SetMat4("WVP", _pv * m_world);
 	m_shader->SetMat4("World", m_world);
 
+	// Mesh
 	m_shader->SetVec3("DiffuseColor", { 1.0f, 1.0f, 1.0f });
 	
+	// Lighting
 	m_shader->SetVec3("AmbientLight", { 0.1f, 0.1f, 0.1f });
 	m_shader->SetVec3("LightPosition", m_lightPosition);
 	m_shader->SetVec3("LightColor", m_lightColor);
+	
+	// Specular
+	m_shader->SetFloat("SpecularStrength", 4);
+	m_shader->SetVec3("SpecularColor", { 3.0f, 3.0f, 3.0f });
+
+	// Camera
+	m_shader->SetVec3("CameraPosition", m_cameraPosition);
 }
 
 void Mesh::Render(mat4 _pv)

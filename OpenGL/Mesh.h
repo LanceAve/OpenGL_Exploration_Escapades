@@ -31,6 +31,9 @@ public:
 	void SetLightPosition(vec3 _lightPosition) { m_lightPosition = _lightPosition; }
 	void SetLightColor(vec3 _lightColor) { m_lightColor = _lightColor; }
 
+	// Camera
+	void SetCameraPosition(vec3 _cameraPosition) { m_cameraPosition = _cameraPosition; }
+
 private:
 
 	// Private Methods
@@ -55,6 +58,9 @@ private:
 	// Lighting
 	vec3 m_lightPosition;
 	vec3 m_lightColor;
+
+	// Camera
+	vec3 m_cameraPosition;
 };
 
 #endif // MESH_H
