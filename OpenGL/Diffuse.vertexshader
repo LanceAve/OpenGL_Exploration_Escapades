@@ -5,12 +5,14 @@ in vec3 vertices;		// value sent from application to this attribute
 in vec3 normals;		// color replaced to normal in preperation for lighting
 in vec2 texCoords;
 
+uniform vec3 CameraPosition;
 uniform mat4 World;
 uniform mat4 WVP;
 
 out vec3 retNormal;		// color replaced by normal to prep for lighting
 out vec3 retFragPos;
 out vec2 retTexCoord;
+out vec3 retViewDirection;
 
 void main()
 {
@@ -18,4 +20,5 @@ void main()
 	retNormal = normalize(mat3(transpose(inverse(World))) * normals);	// adding the normal that I forgot for some reason
 	retTexCoord = texCoords;											// texture coordinates (which are in xy coordinates)
 	retFragPos = vec3(World * vec4(vertices, 1.0f));
+	retViewDirection = normalize(CameraPosition - retFragPos);
 }
