@@ -23,10 +23,10 @@ public:
 	// Methods
 	void LoadShaders(const char* _vertexFilePath, const char* _fragementFilePath);
 	void Cleanup();
+	void SetFloat(const char* _name, float _value);
 	void SetVec3(const char* _name, vec3 _value);
 	void SetMat4(const char* _name, mat4 _value);
 	
-
 private:
 	// Methods
 	void CreateShaderProgram(const char* _vertexFilePath, const char* _fragmentFilePath);	// ID of our shader program
