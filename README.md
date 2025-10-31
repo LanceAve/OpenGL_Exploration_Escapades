@@ -9,11 +9,11 @@ Alongside other sources and the whatnot. Just trying to harden my skills in C++,
 # External stuff
 I'll mention any external libraries I used here so it's just left for future reference. Here's a fancy table (which will be mostly empty for now, but will be populated as time goes by.)
 
-|   | **Library** 	|     **What it was used for**     	|                **What it is**               	|           **URL of Tool**          	|
-| - | -----------	| --------------------------------- | ---------------------------------------------	| -------------------------------------	|
-| 1 | stb_image.h 	| Loading texture onto mesh        	| Loads images from file/memory               	| https://github.com/nothings/stb    	|
-| 2 | glew-2.1.0  	| Basically everything you see     	| Extension loader/manager                    	| https://github.com/nigels-com/glew 	|
-| 3 | glfw-3.3.4  	| Create window and set resolution 	| Cross platform window + GL Context creation 	| https://github.com/nigels-com/glew 	|
+|   | **Library** 	|     **What it was used for**     	|                **What it is**               	|           **URL**                   	    |
+| - | -----------	| --------------------------------- | ---------------------------------------------	| ----------------------------------------- |
+| 1 | stb_image.h 	| Loading texture onto mesh        	| Loads images from file/memory               	| [stb](https://github.com/nothings/stb)    |
+| 2 | glew-2.1.0  	| Basically everything you see     	| Extension loader/manager                    	| [glew](https://github.com/nigels-com/glew)|
+| 3 | glfw-3.3.4  	| Create window and set resolution 	| Cross platform window + GL Context creation 	| [glfw](https://github.com/glfw/glfw) 	    |
 
 more to come...
 
