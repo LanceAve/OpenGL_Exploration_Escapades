@@ -6,7 +6,7 @@ Heya. This is my exploration of using C++ to learn how to use OpenGL. It makes u
    
 Alongside other sources and the whatnot. Just trying to harden my skills in C++, but also learning a graphics library for the heck of it. Might move on to Vulkan later on, but I wager it's gonna be a bit of a difficulty curve, so... 
 
-# External stuff
+## External stuff
 I'll mention any external libraries I used here so it's just left for future reference. Here's a fancy table (which will be mostly empty for now, but will be populated as time goes by.)
 
 |   | **Library** 	|     **What it was used for**     	|                **What it is**               	|           **URL of Tool**          	|
@@ -17,7 +17,7 @@ I'll mention any external libraries I used here so it's just left for future ref
 
 more to come...
 
-# Buidling
+## Buidling
 **NOTE: This project in it's current form only supports Windows, x86/64 platforms. If you want to try and use it on others, you're more than welcome to give it a shot, but I can't help you in that regard. I am planning to figure out how to port it eventually, but that's not the focus of this at the minute.** 
 
 Anyhow, with that out of the way. Building is fairly straightforward you see:
@@ -38,7 +38,7 @@ This is how I structure the project in Visual Studio. This doesn't really mean a
 6. Set platform to Win32 (or x86)
 7. Profit?
 
-# Branches and Overview
+## Branches and Overview
 This repository makes use of branches. Each branch builds from the previous one, so... as I further get through the material, you'll see things shuffling around and more stuff being added in. Nothing earth-shattering. Just me getting through the material and the such. 
 
 You'll notice that there are some branches where I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. Stuff that did work will be given an abbreviation with the readme updated to reflect what was achieved. You'll see what I mean later, don't worry.
@@ -74,7 +74,7 @@ While I have you here, you might as well take a look at what each branch is all 
 | 6.1_lighting_diffuse_setup                                | [View](../../tree/6.1_lighting_diffuse_setup)                                | Initial setup for lighting. Currently contains just Diffuse lighting so far. 
 | 6.2_lighting_phong_diffuse_specular                       | [View](../../tree/6.2_lighting_phong_diffuse_specular)                       | Modification of 6.1 that includes specular and phong lighting.               
 
-# License
+## License
 License? Check [Here](LICENSE.md) if you're interested in that sort of thing.
 
 
