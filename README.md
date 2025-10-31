@@ -9,11 +9,11 @@ Alongside other sources and the whatnot. Just trying to harden my skills in C++,
 # External stuff
 I'll mention any external libraries I used here so it's just left for future reference. Here's a fancy table (which will be mostly empty for now, but will be populated as time goes by.)
 
-|   | **Library** 	|     **What it was used for**     	|                **What it is**               |           **URL of Tool**          |
-| -	| -------------	| ---------------------------------	| ------------------------------------------- | ---------------------------------- |
-| 1 | stb_image.h 	| Loading texture onto mesh        	| Loads images from file/memory               | https://github.com/nothings/stb    |
-| 2 | glew-2.1.0  	| Basically everything you see     	| Extension loader/manager                    | https://github.com/nigels-com/glew |
-| 3 | glfw-3.3.4  	| Create window and set resolution 	| Cross platform window + GL Context creation | https://github.com/nigels-com/glew |
+|   	| **Library** 	|     **What it was used for**     	|                **What it is**               	|           **URL of Tool**          	|
+|:-:	|:-----------:	|:--------------------------------:	|:-------------------------------------------:	|:----------------------------------:	|
+| 1 	| stb_image.h 	| Loading texture onto mesh        	| Loads images from file/memory               	| https://github.com/nothings/stb    	|
+| 2 	| glew-2.1.0  	| Basically everything you see     	| Extension loader/manager                    	| https://github.com/nigels-com/glew 	|
+| 3 	| glfw-3.3.4  	| Create window and set resolution 	| Cross platform window + GL Context creation 	| https://github.com/nigels-com/glew 	|
 
 more to come...
 
@@ -47,32 +47,32 @@ While I have you here, you might as well take a look at what each branch is all 
 
 **_FYI: I noticed a bunch of them shouldn't really have their own branches. I'll do some housekeeping at some point and merge them into each other. That won't happen anytime soon though._**
 
-| **Branch Name**                                           | **Where?**                                                                          | **What?**                                                            
-| --------------------------------------------------------- | :---------------------------------------------------------------------------------: | -----------------------------------------------------------------------------
-| 1.0_project_setup                                         | [View](../../tree/1.0_project_setup)                                                | Setting up the project. Just the very rough skeleton.                        
-| 2.1_triangle_draw                                         | [View](../../tree/2.1_triangle_draw)                                                | First mesh drawn and it's a triangle using OpenGL! Very cool!                
-| 2.2_tool_window                                           | [View](../../tree/2.2_tool_window)                                                  | Added ToolWindow for use in debugging and the whatnot.                       
-| 2.3_color_channel                                         | [View](../../tree/2.3_color_channel)                                                | Added color channels that use tool window sliders.                           
-| 3.0_camera_projection                                     | [View](../../tree/3.0_camera_projection)                                            | First time making of camera projection (world space, object space, etc.).    
-| 4.0_triangle_double_colored                               | [View](../../tree/4.0_triangle_double_colored)                                      | Rendering two angled triangles with a fancy color gradient.                  
-| 4.1_triangle_double_LINES                                 | [View](../../tree/4.1_triangle_double_LINES)                                        | Rendering the triangle but by using the `LINES` primitive.                   
-| 4.2_triangle_double_LINE_STRIP                            | [View](../../tree/4.2_triangle_double_LINE_STRIP)                                   | Rendering the same triangle but with `LINE_STRIP`this time.                  
-| ~~4.2.1_triangle_double_default~~                         | [View](../../tree/4.2.1_triangle_double_default)                                    | Most probably a duplicate of 4.0. Gonna keep it for now.                     
-| 4.3_triangle_double_STRIP                                 | [View](../../tree/4.3_triangle_double_STRIP)                                        | Uses the `STRIP` primitive to render the triangle this time.                 
-| 4.3.1_triangle_double_POINTS                              | [View](../../tree/4.3.1_triangle_double_POINTS)                                     | Rendering with `POINTS` now. Very hard to see. Caution advised.              
-| 4.3.2_triangle_double_LINE_LOOP                           | [View](../../tree/4.3.2_triangle_double_LINE_LOOP)                                  | Rendering the triangle using `LINE_LOOP`! Shape closed automatically.        
-| 4.3.3_triangle_double_FAN                                 | [View](../../tree/4.3.3_triangle_double_FAN)                                        | Exact same triangles by is drawn using `FAN` primitive.                      
-| 4.4_icosahedron_rotate                                    | [View](../../tree/4.4_icosahedron_rotate)                                           | Big achievement! rotating colored icosahedron. Very manual vertex data.      
-| 5.0_square_texture_rotate                                 | [View](../../tree/5.0_square_texture_rotate)                                        | Rotating a square that's textured with a wood png.                           
-| ~~5.1_square_texture_duplicate~~                          | [View](../../tree/5.1_square_texture_duplicate)                                     | Most probably a duplicate of 5.0. Will be merged eventually.                 
-| 5.2_square_texture_rotate_color                           | [View](../../tree/5.2_square_texture_rotate_color)                                  | Adds color blending on a rotating textured square.                           
-| 5.3_square_layered_texture_rotate_color                   | [View](../../tree/5.3_square_layered_texture_rotate_color)                          | Layered two textures on each other! Emoji and wood. Nifty!                   
-| 5.3.1_square_layered_flipped_texture_rotate_color         | [View](../../tree/5.3.1_square_layered_flipped_texture_rotate_color)                | Micro commit that just flips the emoji texture orientation. Merge probably.  
-| 5.3.2_square_layered_flipped_texture_rotate_color_channel | [View](../../tree/5.3.2_square_layered_flipped_texture_rotate_color_channel)        | Same square but now has flipped layered textures with color-channels!        
-| ~~5.3.2.1_icosahedron_UV_junk~~                           | [View](../../tree/5.3.2.1_icosahedron_UV_junk)                                      | Failed experimental UV-mapping that was meant to wrap an icosahedron;        
-| 5.4_square_texture_RGB_to_YUV                             | [View](../../tree/5.4_square_texture_RGB_to_YUV)                                    | RGB to YUV converter that worked like a charm! Uses tool window with a slider
-| 6.1_lighting_diffuse_setup                                | [View](../../tree/6.1_lighting_diffuse_setup)                                       | Initial setup for lighting. Currently contains just Diffuse lighting so far. 
-| 6.2_lighting_phong_diffuse_specular                       | [View](../../tree/6.2_lighting_phong_diffuse_specular)                              | Modification of 6.1 that includes specular and phong lighting.               
+| **Branch Name**                                           | **Where is that?**                                                                  | **What is that?**                                                             | **Status**   |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------ |
+| 1.0_project_setup                                         | [View Branch](../../tree/1.0_project_setup)                                         | Setting up the project. Just the very rough skeleton.                         | Active       |
+| 2.1_triangle_draw                                         | [View Branch](../../tree/2.1_triangle_draw)                                         | First mesh drawn and it's a triangle using OpenGL! Very cool!                 | Active       |
+| 2.2_tool_window                                           | [View Branch](../../tree/2.2_tool_window)                                           | Added ToolWindow for use in debugging and the whatnot.                        | Active       |
+| 2.3_color_channel                                         | [View Branch](../../tree/2.3_color_channel)                                         | Added color channels that use tool window sliders.                            | Active       |
+| 3.0_camera_projection                                     | [View Branch](../../tree/3.0_camera_projection)                                     | First time making of camera projection (world space, object space, etc.).     | Active       |
+| 4.0_triangle_double_colored                               | [View Branch](../../tree/4.0_triangle_double_colored)                               | Rendering two angled triangles with a fancy color gradient.                   | Active       |
+| 4.1_triangle_double_LINES                                 | [View Branch](../../tree/4.1_triangle_double_LINES)                                 | Rendering the triangle but by using the `LINES` primitive.                    | Active       |
+| 4.2_triangle_double_LINE_STRIP                            | [View Branch](../../tree/4.2_triangle_double_LINE_STRIP)                            | Rendering the same triangle but with `LINE_STRIP`this time.                   | Active       |
+| ~~4.2.1_triangle_double_default~~                         | [View Branch](../../tree/4.2.1_triangle_double_default)                             | Most probably a duplicate of 4.0. Gonna keep it for now.                      | Deprecated   |
+| 4.3_triangle_double_STRIP                                 | [View Branch](../../tree/4.3_triangle_double_STRIP)                                 | Uses the `STRIP` primitive to render the triangle this time.                  | Active       |
+| 4.3.1_triangle_double_POINTS                              | [View Branch](../../tree/4.3.1_triangle_double_POINTS)                              | Rendering with `POINTS` now. Very hard to see. Caution advised.               | Active       |
+| 4.3.2_triangle_double_LINE_LOOP                           | [View Branch](../../tree/4.3.2_triangle_double_LINE_LOOP)                           | Rendering the triangle using `LINE_LOOP`! Shape closed automatically.         | Active       |
+| 4.3.3_triangle_double_FAN                                 | [View Branch](../../tree/4.3.3_triangle_double_FAN)                                 | Exact same triangles by is drawn using `FAN` primitive.                       | Active       |
+| 4.4_icosahedron_rotate                                    | [View Branch](../../tree/4.4_icosahedron_rotate)                                    | Big achievement! rotating colored icosahedron. Very manual vertex data.       | Active       |
+| 5.0_square_texture_rotate                                 | [View Branch](../../tree/5.0_square_texture_rotate)                                 | Rotating a square that's textured with a wood png.                            | Active       |
+| ~~5.1_square_texture_duplicate~~                          | [View Branch](../../tree/5.1_square_texture_duplicate)                              | Most probably a duplicate of 5.0. Will be merged eventually.                  | Deprecated   |
+| 5.2_square_texture_rotate_color                           | [View Branch](../../tree/5.2_square_texture_rotate_color)                           | Adds color blending on a rotating textured square.                            | Active       |
+| 5.3_square_layered_texture_rotate_color                   | [View Branch](../../tree/5.3_square_layered_texture_rotate_color)                   | Layered two textures on each other! Emoji and wood. Nifty!                    | Active       |
+| 5.3.1_square_layered_flipped_texture_rotate_color         | [View Branch](../../tree/5.3.1_square_layered_flipped_texture_rotate_color)         | Micro commit that just flips the emoji texture orientation. Merge probably.   | Deprecated   |
+| 5.3.2_square_layered_flipped_texture_rotate_color_channel | [View Branch](../../tree/5.3.2_square_layered_flipped_texture_rotate_color_channel) | Same square but now has flipped layered textures with color-channels!         | Active       |
+| ~~5.3.2.1_icosahedron_UV_junk~~                           | [View Branch](../../tree/5.3.2.1_icosahedron_UV_junk)                               | Failed experimental UV-mapping that was meant to wrap an icosahedron;         | Experimental |
+| 5.4_square_texture_RGB_to_YUV                             | [View Branch](../../tree/5.4_square_texture_RGB_to_YUV)                             | RGB to YUV converter that worked like a charm! Uses tool window with a slider.| Active       |
+| 6.1_lighting_diffuse_setup                                | [View Branch](../../tree/6.1_lighting_diffuse_setup)                                | Initial setup for lighting. Currently contains just Diffuse lighting so far.  | Active       |
+| 6.2_lighting_phong_diffuse_specular                       | [View Branch](../../tree/6.2_lighting_phong_diffuse_specular)                       | Modification of 6.1 that includes specular and phong lighting.                | Active       |
 
 # License
 License? Check [Here](LICENSE.md) if you're interested in that sort of thing.
