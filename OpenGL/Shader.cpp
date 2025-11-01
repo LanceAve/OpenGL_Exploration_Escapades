@@ -35,14 +35,11 @@ void Shader::EvaluateShader(int _infoLength, GLuint _id)
 // sets a vec3 uniform variable in currently active shader program
 void Shader::SetVec3(const char* _name, vec3 _value)
 {
-	// find location of uniform variable
-	GLuint loc = glGetUniformLocation(m_programID, _name);
+	GLuint loc = glGetUniformLocation(m_programID, _name); 	// find location of uniform variable
 	
-	// does it exist?
-	if (loc != -1)
+	if (loc != -1)											// does it exist?
 	{
-		// upload value to that uniform location in GPU
-		glUniform3fv(loc, 1, &_value[0]);
+		glUniform3fv(loc, 1, &_value[0]);					// upload value to that uniform location in GPU
 	}
 }
 
@@ -58,14 +55,22 @@ void Shader::SetMat4(const char* _name, mat4 _value)
 
 void Shader::SetFloat(const char* _name, float _value)
 {
-	// find location of uniform variable
-	GLuint loc = glGetUniformLocation(m_programID, _name);
+	GLuint loc = glGetUniformLocation(m_programID, _name);	// find location of uniform variable
 
-	// does it exist?
+	if (loc != -1)											// does it exist?
+	{
+		glUniform1f(loc, _value);							// upload value to that uniform location in GPU
+	}
+}
+
+void Shader::SetTextureSampler(const char* _name, GLuint _texUnit, int _texUnitID, int _value)
+{
+	GLint loc = glGetUniformLocation(m_programID, _name);
 	if (loc != -1)
 	{
-		// upload value to that uniform location in GPU
-		glUniform1f(loc, _value);
+		glActiveTexture(_texUnit);
+		glBindTexture(GL_TEXTURE_2D, _value);
+		glUniform1i(loc, _texUnitID);
 	}
 }
 
