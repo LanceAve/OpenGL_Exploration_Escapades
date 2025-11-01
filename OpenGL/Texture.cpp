@@ -24,25 +24,33 @@ void Texture::Cleanup()
 // Load texture from filename
 void Texture::LoadTexture(string _fileName)
 {
-	glGenTextures(1, &m_texture);				// Generate texture names
-	glBindTexture(GL_TEXTURE_2D, m_texture);	// Bind named texture to texture unit
+    glGenTextures(1, &m_texture);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	// Set texture wrapping/filtering options (on the now-bound texture)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);					// repeat texture in S (x-axis) direction	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);					// repeat texture in T (x-axis) direction	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); // use smooth filtering + mipmaps when minifying
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);				// use smooth filtering when magnifying
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	
-	stbi_set_flip_vertically_on_load(true);												// flip iamge's y-axis 
-	GLubyte* data = stbi_load(_fileName.c_str(), &m_width, &m_height, &m_channels, 0);	// Load and generate the texture
+    stbi_set_flip_vertically_on_load(true);
+    GLubyte* data = stbi_load(_fileName.c_str(), &m_width, &m_height, &m_channels, 0);
 
-	// load image file into RAM, get width/height/channels
-	M_ASSERT(data != nullptr, "Failed to load texture from file");									// crash (or halt execution) if load fails
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);	// upload image data to GPU as 2D texture
-	glGenerateMipmap(GL_TEXTURE_2D);																// generate mipmaps from base texture
+    M_ASSERT(data != nullptr, "Failed to load texture from file");
 
-	// Free image data from RAM afterwards
-	stbi_image_free(data);
+    GLenum _format;
+    if (m_channels == 1)
+        _format = GL_RED;
+    else if (m_channels == 3)
+        _format = GL_RGB;
+    else if (m_channels == 4)
+        _format = GL_RGBA;
+    else
+        _format = GL_RGB;
+
+    glTexImage2D(GL_TEXTURE_2D, 0, _format, m_width, m_height, 0, _format, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    stbi_image_free(data);
 }
+
 
