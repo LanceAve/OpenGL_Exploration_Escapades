@@ -7,20 +7,28 @@ in vec3 retViewDirection;
 
 out vec4 FragColor;	
 
-// Lighting
-uniform float SpecularStrength;
-uniform vec3 SpecularColor;
-uniform vec3 LightPosition;
-uniform vec3 LightDirection;
-uniform vec3 LightColor;
-uniform vec3 AmbientLight;
+// Lighting Struct
+struct Light 
+{
+	vec3 position;
+	vec3 color;
+	vec3 ambientColor;
+	vec3 diffuseColor;
+	vec3 specularColor;
+};
 
-// Colors
-uniform vec3 DiffuseColor;
+// Material struct
+struct Material 
+{
+	float specularStrength;
 
-// Textures
-uniform sampler2D sampler1;
-uniform sampler2D sampler2;
+	// contains textures as well for texture-based reflection
+	sampler2D diffuseTexture;
+	sampler2D specularTexture;
+};
+
+uniform Material material;
+uniform Light light;
 
 void main() 
 {
