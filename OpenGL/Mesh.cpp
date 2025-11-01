@@ -8,8 +8,8 @@ Mesh::Mesh()
 	m_shader = nullptr;
 
 	// texture related
-	m_texture = { };
-	m_texture2 = { };
+	m_texture_diff = { };
+	m_texture_spec = { };
 
 	// buffer related
 	m_vertexBuffer = 0;
@@ -34,13 +34,13 @@ void Mesh::Create(Shader* _shader)
 {
 	m_shader = _shader;
 
-	// Copy texture to Solution/Assets/Texture folder
-	m_texture = Texture();
-	m_texture.LoadTexture("../Assets/Textures/Wood.jpg");
+	// Copy diffuse texture to Solution/Assets/Texture folder
+	m_texture_diff = Texture();
+	m_texture_diff.LoadTexture("../Assets/Textures/crate_diffuse.jpg");
 
-	// finally, we do the forbidden and layer two textures onto each other
-	m_texture2 = Texture();
-	m_texture2.LoadTexture("../Assets/Textures/Emoji.jpg");
+	// Now also copy the specular texture to the folder
+	m_texture_spec = Texture();
+	m_texture_spec.LoadTexture("../Assets/Textures/crate_specular.jpg");
 	
 	// Good source for float colors (wowzers!)
 	// https://prideout.net/blog/old/archive/colors.php.html#Floats
@@ -102,8 +102,8 @@ void Mesh::Create(Shader* _shader)
 void Mesh::Cleanup()
 {
 	glDeleteBuffers(1, &m_vertexBuffer);
-	m_texture.Cleanup();
-	m_texture2.Cleanup();					// gotta clean up that text2 babe
+	m_texture_diff.Cleanup();
+	m_texture_spec.Cleanup();					// gotta clean up that text2 babe
 }
 
 // this time define what the Render function does
@@ -142,16 +142,6 @@ void Mesh::BindAttributes()
 	
 	// Bind vertex buffer
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-
-	// binding texture one to texture unit 0 (up to 16 in OpenGL)
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture.GetTexture());	// Bind the texture now too
-	glUniform1i(m_shader->GetSampler1(), 0);
-
-	// bind texture two to be layered on texture 1
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, m_texture2.GetTexture());	// Bind the texture now too
-	glUniform1i(m_shader->GetSampler2(), 1);				// notice how it's 1 now.
 }
 
 void Mesh::CalculateTransform()
@@ -167,24 +157,25 @@ void Mesh::SetShaderVariables(mat4 _pv)
 	m_shader->SetMat4("WVP", _pv * m_world);
 	m_shader->SetMat4("World", m_world);
 
-	// Mesh
-	m_shader->SetVec3("DiffuseColor", { 1.0f, 1.0f, 1.0f });
-	
-	// Lighting
-	m_shader->SetVec3("AmbientLight", { 0.1f, 0.1f, 0.1f });
-	m_shader->SetVec3("LightPosition", m_lightPosition);
-	m_shader->SetVec3("LightColor", m_lightColor);
-	
-	// Specular
-	m_shader->SetFloat("SpecularStrength", 4);
-	m_shader->SetVec3("SpecularColor", { 3.0f, 3.0f, 3.0f });
-
 	// Camera
 	m_shader->SetVec3("CameraPosition", m_cameraPosition);
+	
+	// Lighting
+	m_shader->SetVec3("light.position", m_lightPosition);
+	m_shader->SetVec3("light.color", m_lightColor);
+	m_shader->SetVec3("light.ambientColor", { 0.1f, 0.1f, 0.1f });
+	m_shader->SetVec3("light.diffuseColor", { 1.0f, 1.0f, 1.0f });
+	m_shader->SetVec3("light.specularColor", { 3.0f, 3.0f, 3.0f });
+
+	// Mesh Material
+	m_shader->SetFloat("material.specularStrength", 8);
+	m_shader->SetTextureSampler("material.diffuseTexture", GL_TEXTURE0, 0, m_texture_diff.GetTexture());
+	m_shader->SetTextureSampler("material.specularTexture", GL_TEXTURE1, 1, m_texture_spec.GetTexture());
 }
 
 void Mesh::Render(mat4 _pv)
 {
+	// use our custom shader
 	glUseProgram(m_shader->GetProgramID());
 
 	m_rotation.y += 0.0008f;
