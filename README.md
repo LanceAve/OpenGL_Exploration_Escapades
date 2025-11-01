@@ -1,4 +1,6 @@
 # Preamble
+**_Note: This is just the "landing page." This repo heavily relies on branches to demo milestones reached. I would highly recommend that you go [here](#branches-and-overview) to see the branches and all the info surrounding them. There's even a little table there. Ooohh._**
+
 Heya. This is my exploration of using C++ to learn how to use OpenGL. It makes use of the material found in:
 
 1. https://learnopengl.com/
@@ -7,7 +9,7 @@ Heya. This is my exploration of using C++ to learn how to use OpenGL. It makes u
 Alongside other sources and the whatnot. Just trying to harden my skills in C++, but also learning a graphics library for the heck of it. Might move on to Vulkan later on, but I wager it's gonna be a bit of a difficulty curve, so... 
 
 ## External stuff
-I'll mention any external libraries I used here so it's just left for future reference. Here's a fancy table (which will be mostly empty for now, but will be populated as time goes by.)
+I'll mention any external libraries I used here so it's just left for future reference. Here's a fancy little table for yah! I will eventually add some more technical stuff (like IDE setups down to even running it on your toaster if you're into that kinda thing!)
 
 |   | **Library** 	|     **What it was used for**     	|                **What it is**               	|           **URL**                   	    |
 | - | -----------	| --------------------------------- | ---------------------------------------------	| ----------------------------------------- |
@@ -41,7 +43,9 @@ This is how I structure the project in Visual Studio. This doesn't really mean a
 ## Branches and Overview
 This repository makes use of branches. Each branch builds from the previous one, so... as I further get through the material, you'll see things shuffling around and more stuff being added in. Nothing earth-shattering. Just me getting through the material and the such. 
 
-You'll notice that there are some branches where I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. Stuff that did work will be given an abbreviation with the readme updated to reflect what was achieved. You'll see what I mean later, don't worry.
+You'll notice that there are some branches where I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. The whole point of it is to just leave a breadcrumb of info when I come back to this months later so I know what the heck I was attempting. It'll still run just fine! I'll (try) to make sure of it. But like... expectations won't match reality. So the result I was aiming for won't match the reality. Who knows! If I manage to successfully make that "feature" works, I'll remove the junk and give it it's own branch. 
+
+Anyhow. With that ramble out of the way, stuff that did work will be given an abbreviation with the readme updated to reflect what was achieved. You'll see what I mean later, don't worry.
 
 While I have you here, you might as well take a look at what each branch is all about. If you want to, at least. Here's a little table that shows them off. It's gonna get updated as more shows up. You get a little link to follow too. Isn't that nice?
 
@@ -61,7 +65,7 @@ While I have you here, you might as well take a look at what each branch is all 
 | 4.3_triangle_double_STRIP                                 | [View](../../tree/4.3_triangle_double_STRIP)                                 | Uses the `STRIP` primitive to render the triangle this time.                 
 | 4.3.1_triangle_double_POINTS                              | [View](../../tree/4.3.1_triangle_double_POINTS)                              | Rendering with `POINTS` now. Very hard to see. Caution advised.              
 | 4.3.2_triangle_double_LINE_LOOP                           | [View](../../tree/4.3.2_triangle_double_LINE_LOOP)                           | Rendering the triangle using `LINE_LOOP`! Shape closed automatically.        
-| 4.3.3_triangle_double_FAN                                 | [View](../../tree/4.3.3_triangle_double_FAN)                                 | Exact same triangles by is drawn using `FAN` primitive.                      
+| 4.3.3_triangle_double_FAN                                 | [View](../../tree/4.3.3_triangle_double_FAN)                                 | Exact same triangles but is drawn using `FAN` primitive.                      
 | 4.4_icosahedron_rotate                                    | [View](../../tree/4.4_icosahedron_rotate)                                    | Big achievement! rotating colored icosahedron. Very manual vertex data.      
 | 5.0_square_texture_rotate                                 | [View](../../tree/5.0_square_texture_rotate)                                 | Rotating a square that's textured with a wood png.                           
 | ~~5.1_square_texture_duplicate~~                          | [View](../../tree/5.1_square_texture_duplicate)                              | Most probably a duplicate of 5.0. Will be merged eventually.                 
@@ -73,6 +77,7 @@ While I have you here, you might as well take a look at what each branch is all 
 | 5.4_square_texture_RGB_to_YUV                             | [View](../../tree/5.4_square_texture_RGB_to_YUV)                             | RGB to YUV converter that worked like a charm! Uses tool window with a slider
 | 6.1_lighting_diffuse_setup                                | [View](../../tree/6.1_lighting_diffuse_setup)                                | Initial setup for lighting. Currently contains just Diffuse lighting so far. 
 | 6.2_lighting_phong_diffuse_specular                       | [View](../../tree/6.2_lighting_phong_diffuse_specular)                       | Modification of 6.1 that includes specular and phong lighting.               
+| 8.0_lighting_specular_texture_reflection                  | [View](../../tree/8.0_lighting_specular_texture_reflection)                  | Added the ability to use a specular texture for lighting.       
 
 ## License
 License? Check [Here](LICENSE.md) if you're interested in that sort of thing.
