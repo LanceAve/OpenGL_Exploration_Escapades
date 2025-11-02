@@ -58,11 +58,14 @@ void GameController::RunGame()
 
 	do
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);					// Clear the screen
-		m_meshBox.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
-		m_meshLight.Render(m_camera.GetProjection() * m_camera.GetView());	// add the projection system now so we have a camera
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);								// Clear the screen
+		for (unsigned int count = 0; count < m_meshBoxes.size(); count++)
+		{
+			m_meshBoxes[count].Render(m_camera.GetProjection() * m_camera.GetView());	// render all cube meshes
+		}
+		m_meshLight.Render(m_camera.GetProjection() * m_camera.GetView());				// add the projection system now so we have a camera
 
-		glfwSwapBuffers(WindowController::GetInstance().GetWindow());		// Swap the back and front buffers
+		glfwSwapBuffers(WindowController::GetInstance().GetWindow());					// Swap the back and front buffers
 		glfwPollEvents();
 
 	} 
