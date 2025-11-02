@@ -7,7 +7,7 @@ GameController::GameController()
 	m_shaderColor = { };
 	m_shaderDiffuse = { };
 	m_camera = { };
-	m_meshBox = { };
+	m_meshBoxes.clear();
 	m_meshLight = { };
 }
 
@@ -18,6 +18,7 @@ void GameController::Initialize()
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);				// Make sure that we can capture the escape key if it's pressed
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);								// Changed to Black backgroun now (can be deduced using art program)
 	glEnable(GL_DEPTH_TEST);											// prevents face of mesh from being displayed on both sides
+	srand(time(0));
 
 
 	// Create the default perspective camera
@@ -41,11 +42,19 @@ void GameController::RunGame()
 	m_meshLight.SetPosition({ 1.0f, -0.5f, 0.0f });
 	m_meshLight.SetScale({ 0.1f, 0.1f, 0.1f });
 
-	m_meshBox = Mesh();
-	m_meshBox.Create(&m_shaderDiffuse);
-	m_meshBox.SetLightColor({ 0.5f, 0.9f, 0.5f });
-	m_meshBox.SetLightPosition(m_meshLight.GetPosition());
-	m_meshBox.SetCameraPosition(m_camera.GetPosition());
+	// randomly spawn 10 cubes with random scale and location
+	for (int count = 0; count < 10; count++)
+	{
+
+		Mesh box = Mesh();
+		box.Create(&m_shaderDiffuse);
+		box.SetLightColor({ 0.5f, 0.9f, 0.5f });
+		box.SetLightPosition(m_meshLight.GetPosition());
+		box.SetCameraPosition(m_camera.GetPosition());
+		box.SetScale({ 0.3f, 0.3f, 0.3f });
+		box.SetPosition({ linearRand(-1.0f, 1.0f), linearRand(-1.0f, 1.0f), linearRand(-1.0f, 1.0f) });
+		m_meshBoxes.push_back(box);
+	}
 
 	do
 	{
