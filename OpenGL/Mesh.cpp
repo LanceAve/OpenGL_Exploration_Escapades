@@ -22,7 +22,7 @@ Mesh::Mesh()
 	m_world = mat4();
 
 	// light related
-	m_lightPosition = { 0, 0, 0 };
+	m_lightPosition = { 1, 1, 1 };
 	m_lightColor = { 1, 1, 1 };		// default to white for now
 
 }
@@ -161,7 +161,7 @@ void Mesh::SetShaderVariables(mat4 _pv)
 	m_shader->SetVec3("CameraPosition", m_cameraPosition);
 	
 	// Lighting
-	m_shader->SetVec3("light.position", m_lightPosition);
+	m_shader->SetVec3("light.direction", m_lightPosition);
 	m_shader->SetVec3("light.color", m_lightColor);
 	m_shader->SetVec3("light.ambientColor", { 0.1f, 0.1f, 0.1f });
 	m_shader->SetVec3("light.diffuseColor", { 1.0f, 1.0f, 1.0f });
