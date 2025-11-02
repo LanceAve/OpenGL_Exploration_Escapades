@@ -74,7 +74,11 @@ void GameController::RunGame()
 
 	// memory cleaning portion
 	m_meshLight.Cleanup();
-	m_meshBox.Cleanup();
+	// must cleanup every cube spawned
+	for (unsigned int count = 0; count < m_meshBoxes.size(); count++)
+	{
+		m_meshBoxes[count].Cleanup();
+	}
 	m_shaderDiffuse.Cleanup();
 	m_shaderColor.Cleanup();
 }
