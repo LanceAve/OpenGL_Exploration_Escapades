@@ -110,6 +110,9 @@ void Mesh::Cleanup()
 // and define the world view stuff
 void Mesh::BindAttributes()
 {	
+	// Bind vertex buffer
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+
 	// 1st attribute buffer : vertices
 	glEnableVertexAttribArray(m_shader->GetAttrVertices());
 	glVertexAttribPointer(
@@ -139,9 +142,6 @@ void Mesh::BindAttributes()
 		GL_FALSE,						// normalized?
 		8 * sizeof(float),				// stride (now modified to 8 floats per vertex def)
 		(void*)(6 * sizeof(float)));	// array buffer offset
-	
-	// Bind vertex buffer
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 }
 
 void Mesh::CalculateTransform()
@@ -161,10 +161,17 @@ void Mesh::SetShaderVariables(mat4 _pv)
 	m_shader->SetVec3("CameraPosition", m_cameraPosition);
 	
 	// Lighting
-	m_shader->SetVec3("light.position", m_lightPosition);
-	m_shader->SetVec3("light.color", m_lightColor);
+	m_shader->SetVec3("light.position", m_lightPosition);				// light position
+	m_shader->SetVec3("light.color", m_lightColor);						// light color
+
+	// attentuation configuration
+	m_shader->SetFloat("light.constant", 1.0f);							// constant in attentuation
+	m_shader->SetFloat("light.linear", 0.09f);							// linear value in attentuation
+	m_shader->SetFloat("light.quadratic", 0.0032f);						// quadratic in attentuation
+	
+	
 	m_shader->SetVec3("light.ambientColor", { 0.1f, 0.1f, 0.1f });
-	m_shader->SetVec3("light.diffuseColor", { 1.0f, 1.0f, 1.0f });
+	m_shader->SetVec3("light.diffuseColor", { 1.0f, 1.0f, 1.0f });		
 	m_shader->SetVec3("light.specularColor", { 3.0f, 3.0f, 3.0f });
 
 	// Mesh Material
