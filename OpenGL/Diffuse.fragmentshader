@@ -56,6 +56,7 @@ void main()
 
 		float distance = length(light.position - retFragPos);
 		float att = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));		// attentuation calculation - light intensity reducation over a distance
+		att *= 1 - pow(clamp(a / d, 0.0f, 1.0f), light.falloff);														// falloff of light - blur edges as you approach the cone.
 
 		// lighting includes specular greyscale texture, lambertian lighting, ambient lighting, and now attentuation for point light
 		vec3 ambient = texture(material.diffuseTexture, retTexCoord).rgb * light.ambientColor;
