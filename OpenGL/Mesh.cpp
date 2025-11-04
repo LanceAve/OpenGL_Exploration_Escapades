@@ -164,10 +164,16 @@ void Mesh::SetShaderVariables(mat4 _pv)
 	m_shader->SetVec3("light.position", m_lightPosition);				// light position
 	m_shader->SetVec3("light.color", m_lightColor);						// light color
 
-	// attentuation configuration
+	// light attentuation config
 	m_shader->SetFloat("light.constant", 1.0f);							// constant in attentuation
 	m_shader->SetFloat("light.linear", 0.09f);							// linear value in attentuation
 	m_shader->SetFloat("light.quadratic", 0.0032f);						// quadratic in attentuation
+
+	// spotlight lighting config
+	m_shader->SetVec3("light.position", m_lightPosition);								
+	m_shader->SetVec3("light.direction", normalize(vec3({ 0, 0, 0 }) - m_lightPosition));
+	m_shader->SetFloat("light.coneAngle", radians(15.0f));					
+	m_shader->SetFloat("light.falloff", 100);
 	
 	
 	m_shader->SetVec3("light.ambientColor", { 0.1f, 0.1f, 0.1f });
