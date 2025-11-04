@@ -10,7 +10,7 @@ Camera::Camera()
 
 Camera::Camera(Resolution _screenResolution)
 {
-	m_position = { 2, 2, 2 };
+	m_position = { 1, 1, 1 };
 	/* Projection matrix specs:
 		45° FoV
 		4:3 aspect ration
