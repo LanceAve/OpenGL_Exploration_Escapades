@@ -58,6 +58,7 @@ private:
 	// Lighting
 	vec3 m_lightPosition;
 	vec3 m_lightColor;
+	vec3 m_lightDir;
 
 	// Camera
 	vec3 m_cameraPosition;

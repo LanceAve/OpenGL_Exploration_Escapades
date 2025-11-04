@@ -24,6 +24,7 @@ Mesh::Mesh()
 	// light related
 	m_lightPosition = { 1, 1, 1 };
 	m_lightColor = { 1, 1, 1 };		// default to white for now
+	m_lightDir = vec3(-0.2f, -1.0f, -0.3f);
 
 }
 
@@ -110,6 +111,10 @@ void Mesh::Cleanup()
 // and define the world view stuff
 void Mesh::BindAttributes()
 {	
+
+	// Bind vertex buffer
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+
 	// 1st attribute buffer : vertices
 	glEnableVertexAttribArray(m_shader->GetAttrVertices());
 	glVertexAttribPointer(
@@ -139,9 +144,6 @@ void Mesh::BindAttributes()
 		GL_FALSE,						// normalized?
 		8 * sizeof(float),				// stride (now modified to 8 floats per vertex def)
 		(void*)(6 * sizeof(float)));	// array buffer offset
-	
-	// Bind vertex buffer
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 }
 
 void Mesh::CalculateTransform()
@@ -161,14 +163,14 @@ void Mesh::SetShaderVariables(mat4 _pv)
 	m_shader->SetVec3("CameraPosition", m_cameraPosition);
 	
 	// Lighting
-	m_shader->SetVec3("light.direction", m_lightPosition);
+	m_shader->SetVec3("light.direction", m_lightDir);
 	m_shader->SetVec3("light.color", m_lightColor);
 	m_shader->SetVec3("light.ambientColor", { 0.1f, 0.1f, 0.1f });
 	m_shader->SetVec3("light.diffuseColor", { 1.0f, 1.0f, 1.0f });
 	m_shader->SetVec3("light.specularColor", { 3.0f, 3.0f, 3.0f });
 
 	// Mesh Material
-	m_shader->SetFloat("material.specularStrength", 8);
+	m_shader->SetFloat("material.specularStrength", 2);
 	m_shader->SetTextureSampler("material.diffuseTexture", GL_TEXTURE0, 0, m_texture_diff.GetTexture());
 	m_shader->SetTextureSampler("material.specularTexture", GL_TEXTURE1, 1, m_texture_spec.GetTexture());
 }
