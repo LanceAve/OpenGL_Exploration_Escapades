@@ -2,6 +2,8 @@
 #include "Shader.h"
 #include "StandardIncludes.h"
 
+vector<Mesh> Mesh::Lights;
+
 Mesh::Mesh()
 {
 	// shader related
@@ -98,6 +100,12 @@ void Mesh::Create(Shader* _shader)
 	glBufferData(GL_ARRAY_BUFFER, m_vertexData.size() * sizeof(float), m_vertexData.data(), GL_STATIC_DRAW);
 }
 
+string Mesh::Concat(string _s1, int _index, string _s2)
+{
+	string index = to_string(_index);
+	return (_s1 + index + _s2);
+}
+
 // define what the cleanup function does (used for garbage collection)
 void Mesh::Cleanup()
 {
@@ -164,21 +172,25 @@ void Mesh::SetShaderVariables(mat4 _pv)
 	m_shader->SetVec3("light.position", m_lightPosition);				// light position
 	m_shader->SetVec3("light.color", m_lightColor);						// light color
 
-	// light attentuation config
-	m_shader->SetFloat("light.constant", 1.0f);							// constant in attentuation
-	m_shader->SetFloat("light.linear", 0.09f);							// linear value in attentuation
-	m_shader->SetFloat("light.quadratic", 0.0032f);						// quadratic in attentuation
+	// spawning multiple light emitting sources
+	for (unsigned int i = 0; i < Lights.size(); i++)
+	{
+		// light attentuation config
+		m_shader->SetFloat(Concat("light[", i, "].constant").c_str(), 1.0f);
+		m_shader->SetFloat(Concat("light[", i, "].linear").c_str(), 0.09f);	
+		m_shader->SetFloat(Concat("light[", i, "].quadratic").c_str(), 0.032f);
 
-	// spotlight lighting config
-	m_shader->SetVec3("light.position", m_lightPosition);								
-	m_shader->SetVec3("light.direction", normalize(vec3({ 0, 0, 0 }) - m_lightPosition));
-	m_shader->SetFloat("light.coneAngle", radians(15.0f));					
-	m_shader->SetFloat("light.falloff", 100);
-	
-	
-	m_shader->SetVec3("light.ambientColor", { 0.1f, 0.1f, 0.1f });
-	m_shader->SetVec3("light.diffuseColor", { 1.0f, 1.0f, 1.0f });		
-	m_shader->SetVec3("light.specularColor", { 3.0f, 3.0f, 3.0f });
+		// spotlight lighting config
+		m_shader->SetVec3(Concat("light[", i, "].position").c_str(), Lights[i].GetPosition());
+		m_shader->SetVec3(Concat("light[", i, "].direction").c_str(), normalize(vec3({ 0.0f + i * 0.1f, 0, 0.0f + i * 0.1f }) - Lights[i].GetPosition()));
+		m_shader->SetFloat(Concat("light[", i, "].coneAngle").c_str(), radians(5.0f));
+		m_shader->SetFloat(Concat("light[", i, "].falloff").c_str(), 200);
+
+
+		m_shader->SetVec3(Concat("light[", i, "].ambientColor").c_str(), { 0.1f, 0.1f, 0.1f });
+		m_shader->SetVec3(Concat("light[", i, "].diffuseColor").c_str(), Lights[i].GetColor());
+		m_shader->SetVec3(Concat("light[", i, "].specularColor").c_str(), { 3.0f, 3.0f, 3.0f });
+	}
 
 	// Mesh Material
 	m_shader->SetFloat("material.specularStrength", 8);
