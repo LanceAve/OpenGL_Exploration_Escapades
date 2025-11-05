@@ -51,7 +51,7 @@ This repository makes use of branches. Each branch builds from the previous one,
 You'll notice that there are some branches where I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. The whole point of it is to just leave a breadcrumb of info when I come back to this months later so I know what the heck I was attempting. It'll still run just fine! I'll (try) to make sure of it. But like... expectations won't match reality. So the result I was aiming for won't match the reality. Who knows! If I manage to successfully make that "feature" works, I'll remove the junk and give it it's own branch. 
 
 **Note:** Since the branches table has become fairly huge, I decided to make its own markdown file in here:  
-📜 [**BRANCHES.md**](Branches.md)
+📜 [**BRANCHES.md**](BRANCHES.md)
 
 ## License
 License? Check [Here](LICENSE.md) if you're interested in that sort of thing.
