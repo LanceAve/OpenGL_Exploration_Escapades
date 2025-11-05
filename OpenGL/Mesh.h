@@ -26,6 +26,8 @@ public:
 	void SetPosition(vec3 _position) { m_position = _position; }
 	vec3 GetPosition() { return m_position; }
 	void SetScale(vec3 _scale) { m_scale = _scale; }
+	void SetColor(vec3 _color) { m_color = _color; }
+	vec3 GetColor() { return m_color; }
 
 	// setter for lighting position and lighting color
 	void SetLightPosition(vec3 _lightPosition) { m_lightPosition = _lightPosition; }
@@ -54,6 +56,7 @@ private:
 	vec3 m_rotation;
 	vec3 m_scale;
 	mat4 m_world;
+	vec3 m_color;
 
 	// Lighting
 	vec3 m_lightPosition;
