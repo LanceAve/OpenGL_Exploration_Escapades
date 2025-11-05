@@ -36,11 +36,15 @@ public:
 	// Camera
 	void SetCameraPosition(vec3 _cameraPosition) { m_cameraPosition = _cameraPosition; }
 
+	// Public Members
+	static vector<Mesh> Lights;
+
 private:
 
 	// Private Methods
 	void SetShaderVariables(mat4 _pv);
 	void BindAttributes();
+	string Concat(string _s1, int _index, string _s2);
 
 	// Member Variables
 	Shader* m_shader;						// then define the variable
