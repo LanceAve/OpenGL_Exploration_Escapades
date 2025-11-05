@@ -37,10 +37,16 @@ void GameController::RunGame()
 	m_shaderDiffuse.LoadShaders("Diffuse.vertexshader", "Diffuse.fragmentShader");
 	
 	// Mesh creation
-	m_meshLight = Mesh();
-	m_meshLight.Create(&m_shaderColor);
-	m_meshLight.SetPosition({ 0.5f, 0.0f, -0.5f });
-	m_meshLight.SetScale({ 0.1f, 0.1f, 0.1f });
+	// doing the same thing that was done with the cube line, but with the ligths this time
+	for (int count = 0; count < 4; count++)
+	{
+		m_meshLight = Mesh();
+		m_meshLight.Create(&m_shaderColor);
+		m_meshLight.SetPosition({ 0.5f + (float)count / 10.0f, 0.0f, -0.5f });
+		m_meshLight.SetColor({ linearRand(0.0f, 1.0f), linearRand(0.0f, 1.0f), linearRand(0.0f, 1.0f) });
+		m_meshLight.SetScale({ 0.1f, 0.1f, 0.1f });
+		Mesh::Lights.push_back(m_meshLight);
+	}
 
 	// modifying the for loop such that it creates a wall of cubes rather than spawning them randomly
 	for (int col = 0; col < 10; col++)
@@ -65,7 +71,11 @@ void GameController::RunGame()
 		{
 			m_meshBoxes[count].Render(m_camera.GetProjection() * m_camera.GetView());	// render all cube meshes
 		}
-		m_meshLight.Render(m_camera.GetProjection() * m_camera.GetView());				// add the projection system now so we have a camera
+		
+		for (unsigned int count = 0; count < Mesh::Lights.size(); count++)
+		{
+			Mesh::Lights[count].Render(m_camera.GetProjection() * m_camera.GetView());	// render all cube meshes
+		}
 
 		glfwSwapBuffers(WindowController::GetInstance().GetWindow());					// Swap the back and front buffers
 		glfwPollEvents();
@@ -74,8 +84,12 @@ void GameController::RunGame()
 	while (glfwGetKey(WindowController::GetInstance().GetWindow(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&		// Check if the ESC key was pressed
 			glfwWindowShouldClose(WindowController::GetInstance().GetWindow()) == 0);						// Check if the window was closed
 
-	// memory cleaning portion
-	m_meshLight.Cleanup();
+	// must cleanup every light cube spawned as well
+	for (unsigned int count = 0; count < Mesh::Lights.size(); count++)
+	{
+		Mesh::Lights[count].Cleanup();
+	}
+	
 	// must cleanup every cube spawned
 	for (unsigned int count = 0; count < m_meshBoxes.size(); count++)
 	{
