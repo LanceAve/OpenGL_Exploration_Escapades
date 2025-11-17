@@ -1,11 +1,11 @@
 # Preamble
 
-> **Note:** This repo heavily relies on **branches** to demo milestones reached.  
-> I highly recommend checking out the [Branches & Overview](#branches-and-overview) to see the full progression table. There's even a fancy one in there too!
+> **Note:** This repo heavily relies on branches to demo milestones reached.  
+> If you wanna slueth the full table, you can check out the [Branches & Overview](#branches-and-overview) to see the complete table that shows all the stuff.
 
-Heya there! This is just my little personal sandbox in the large swath of the interwebs in order for me to learn **OpenGL** with **C++**, while mostly following the material from [LearnOpenGL](https://learnopengl.com/) and maybe more to come!  
+Heya there! This is just my little personal sandbox in the large swath of the interwebs in order for me to learn OpenGL with C++. I'm mostly referring to the material from [LearnOpenGL](https://learnopengl.com/), but I'm not alergic to finding out more as I go through it. You'll see it in here soon enoughand maybe more to come!  
 
-The goal, you may ask? Well, mostly to sharpen my C++ fundamentals while also exploring some real-time rendering and the whatnot! Who knows? I might even swing my bat at **Vulkan** later (but that's a much steeper climb so don't hold your breathe, lest you faint!)
+The goal, you may ask? Well, mostly to sharpen my C++ fundamentals while also exploring some real-time rendering and the whatnot! Who knows? I might even swing my bat at Vulkan later (but that's a much steeper climb so don't hold your breathe, lest you faint!)
 
 ## External stuff
 I'll mention any external libraries I used here so it's just left for future reference. Mostly for my eyes honestly because I'm sure I'll forget a year later.
@@ -21,24 +21,25 @@ Here's a fancy little table for yah! I will eventually add some more technical s
 *more to come...*
 
 ## Buidling
-**NOTE:** This project in its current form only supports **Windows x86/64**. 
+**NOTE:** At the minute, this project form only supports Windows x86/64. 
 
-If you wanna try and use it on other platforms, you're more than welcome to give it a shot, but you're on your own. It's on my to-do list to port it to other platforms though.
+If you wanna try and use it on other platforms, you're more than welcome to give it a shot, but you're on your own. It's on my to-do list to port it to other platforms though. Lord knows how I'll go about doing that, but eh. Not right now.
 
 ### Setup
-1. When running the **Visual Studio Installer**, select:
-   - **.NET desktop development**
-   - **Desktop development with C++**
-2. Under **Individual Components**, include:
-   - **MSVC – Visual C++ compiler and libraries for x64/x86**
+1. When you run the Visual Studio Installer, select:
+   - NET desktop development
+   - Desktop development with C++
+2. Then under Individual Components include this (otherwise it won't run):
+   - MSVC – Visual C++ compiler and libraries for x64/x86
 
 ### Project Configuration
-3. Enable **C++/CLI** support → set runtime to `/clr`
+3. Enable C++/CLI support -> set runtime to `/clr`
 4. Make sure the following libraries are included:
    - `glew`
    - `glfw`
    - `stb`
-5. Set your platform to **Win32 (x86)**
+   - more (tbd)
+5. Then set your platform to Win32 (x86)
 6. Profit??
 
 This is roughly how I structure the project in Visual studio by the by. It's a filter only though, but you can use whatever method that tickles your fancy.
@@ -50,8 +51,8 @@ This repository makes use of branches. Each branch builds from the previous one,
 
 You'll notice that there are some branches where I go off on a tangent. Some will be marked as `_junk` for experimental stuff that didn't work. The whole point of it is to just leave a breadcrumb of info when I come back to this months later so I know what the heck I was attempting. It'll still run just fine! I'll (try) to make sure of it. But like... expectations won't match reality. So the result I was aiming for won't match the reality. Who knows! If I manage to successfully make that "feature" works, I'll remove the junk and give it it's own branch. 
 
-**Note:** Since the branches table has become fairly huge, I decided to make its own markdown file in here:  
-📜 [**BRANCHES.md**](BRANCHES.md)
+**Note:** Since the branches table got a smidge thick, I trimmed this down a peg to make its own markdown file in here:  
+[**BRANCHES.md**](BRANCHES.md)
 
 ## License
 License? Check [Here](LICENSE.md) if you're interested in that sort of thing.
