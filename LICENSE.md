@@ -1,1 +1,0 @@
-Considering that this is just an escapade of sorts, there's no real reason for it to be licensed per se. But... for the sake of offical-ness, all code here is under the terms of the CC BY-NC 4.0 license (or newer).
