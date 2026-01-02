@@ -32,5 +32,8 @@ This repository uses branches to isolate major milestones and features. Non-func
 A detailed overview is available here:
 [**BRANCHES.md**](BRANCHES.md)
 
+## Third-Party Libraries
+This project includes third-party libraries distributed under their respective open-source licenses. See [External](External/) for details
+
 ## License
 This project is licensed under the MIT License. See [**LICENSE**](LICENSE.md) for more details.
